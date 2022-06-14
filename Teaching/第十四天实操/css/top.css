@@ -1,0 +1,45 @@
+.top {
+    height: 103px;
+    /* background: purple; */
+}
+
+.top .logo {
+    font-size: 0;
+    overflow: hidden;
+    margin-top: 24px;
+    margin-right: 38px;
+    width: 248px;
+    height: 58px;
+    background: url(../img/logo.png) no-repeat;
+
+}
+
+.top p {
+    font-size: 12px;
+    color: #999;
+    background: url(../img/line.png) no-repeat left center;
+    font-style: italic;
+    margin-top: 34px;
+    padding-left: 22px;
+}
+
+.top ul li {
+    float: left;
+}
+
+.top ul li a {
+    display: block;
+    font-size: 12px;
+    padding: 0 17px;
+    margin-top: 31px;
+    height: 72px;
+    line-height: 72px;
+    color: #000;
+
+}
+
+.top ul li a:hover {
+    color: #fff;
+    background: #f75a53;
+    border-radius: 5px 5px 0 0;
+}
