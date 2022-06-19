@@ -1,0 +1,227 @@
+header {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    width: 244px;
+    height: 59px;
+    background: url(./img/logo.png);
+    font-size: 0;
+}
+
+header ul {
+    font-size: 14px;
+    display: flex;
+}
+
+header ul li a {
+    display: flex;
+    padding: 22px 30px;
+    color: #000;
+}
+
+header a:hover {
+    color: #fff;
+    background: #000;
+}
+
+.banner img {
+    width: 100%;
+}
+
+/* .banner {
+    display: flex;
+}
+
+@keyframes play {
+    to {
+        width: 0%;
+    }
+}
+
+.banner img:nth-child(1) {
+    width: 100%;
+    animation: play 2s infinite linear;
+} */
+
+section {
+    padding: 60px 0;
+    /* background: #f8f3ed; */
+}
+
+section ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+section ul li {
+    width: 30%;
+    background: #fff;
+    text-align: center;
+    font-family: "simsun";
+}
+
+section ul li img {
+    width: 100%;
+}
+
+section ul li figcaption {
+    margin: 15px auto 30px;
+    font-size: 18px;
+}
+
+section ul li p {
+    font-size: 12px;
+    text-align: left;
+    line-height: 26px;
+    padding: 0 24px;
+}
+
+section ul li a {
+    color: #000;
+    display: block;
+    width: 60px;
+    height: 60px;
+    border: 1px dashed #999;
+    margin: 45px auto 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+}
+
+main {
+    padding-top: 30px;
+    height: 260px;
+    background: url(./img/bg.jpg) repeat;
+
+}
+
+main ul {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+main ul li p {
+    font-size: 16px;
+    margin: 15px 0;
+}
+
+.photo,
+footer {
+    /* background: #f8f3ed; */
+    text-align: center;
+}
+
+.photo h3,
+footer h3 {
+    padding: 35px 0 8px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.photo ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.photo ul li {
+    margin-top: 30px;
+    width: 23%;
+    box-shadow: 5px 5px 5px #999;
+}
+
+.photo ul li p {
+    padding: 10px 0;
+}
+
+.photo ul li img {
+    width: 100%;
+}
+
+footer {
+    padding: 20px 0 30px;
+}
+
+footer ul {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer ul li:nth-child(1) {
+    width: 56%;
+    text-align: left;
+    margin-right: 1%;
+
+}
+
+footer ul li>img {
+    width: 100%;
+}
+
+footer ul li dl {
+    width: 100%;
+    display: flex;
+    margin-bottom: 3%;
+}
+
+footer ul li dt {
+    width: 20%;
+}
+
+footer ul li dt img {
+    width: 100%;
+}
+
+footer ul li dd {
+    width: 80%;
+    text-align: left;
+    margin-left: 3%;
+}
+
+footer ul li dd h5 {
+    line-height: 28px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+footer ul li dd p {
+    line-height: 20px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+footer ul li dd a {
+    font-size: 12px;
+    color: #e5a837;
+}
+
+.address {
+    padding: 15px 0 35px;
+    background: #323232;
+    font-size: 12px;
+    line-height: 28px;
+    color: #fff;
+}
+
+.address>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.address>div div:nth-child(1) {
+    height: 100px;
+    background: url(./img/code.png) no-repeat;
+}
+
+.address>div div:nth-child(1) p {
+    margin-left: 120px;
+}
+
+.address>div div:nth-child(2) {}

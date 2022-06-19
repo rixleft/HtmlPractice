@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        article {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            /* background: rgb(125, 107, 107); */
+            transform-style: preserve-3d;
+            animation: play 3s infinite linear;
+        }
+
+        section {
+            width: 200px;
+            height: 200px;
+            padding: 30px;
+            border: 1px solid rgb(235, 200, 200);
+            box-sizing: border-box;
+            border-radius: 50%;
+            display: flex;
+            position: absolute;
+            background: rgb(170, 94, 94);
+            opacity: 0.5;
+            transition: 1s;
+        }
+
+        span {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: block;
+            background: rgb(132, 0, 255);
+        }
+
+        section:nth-child(1) {
+            justify-content: center;
+            align-items: center;
+            background: rgb(228, 255, 27);
+            transform: translateZ(-100px);
+        }
+
+        section:nth-child(2) {
+            justify-content: space-between;
+            background: rgb(179, 2, 255);
+            transform: translateZ(100px);
+        }
+
+        section:nth-child(2) span:nth-child(2) {
+            align-self: flex-end;
+        }
+
+        section:nth-child(3) {
+            justify-content: space-between;
+            background: rgb(1, 255, 251);
+            transform: rotateX(90deg) translateZ(100px);
+        }
+
+        section:nth-child(3) span:nth-child(3) {
+            align-self: flex-end;
+        }
+
+        section:nth-child(3) span:nth-child(2) {
+            align-self: center;
+        }
+
+        section:nth-child(4) {
+            flex-wrap: wrap;
+            align-content: space-between;
+            background: rgb(255, 183, 183);
+            transform: rotateX(90deg) translateZ(-100px);
+        }
+
+        section:nth-child(4) div {
+            width: 100%;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        section:nth-child(5) {
+            flex-wrap: wrap;
+            background: rgb(46, 228, 5);
+            transform: rotatey(90deg) translateZ(-100px);
+
+        }
+
+        section:nth-child(5) div {
+            width: 100%;
+            /* padding: 10px; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        section:nth-child(5) div:nth-child(1) {
+            align-items: flex-start;
+        }
+
+        section:nth-child(5) div:nth-child(2) {
+            justify-content: center;
+        }
+
+        section:nth-child(5) div:nth-child(3) {
+            align-items: flex-end;
+        }
+
+        section:nth-child(6) div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        section:nth-child(6) {
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgb(252, 211, 5);
+            transform: rotatey(90deg) translateZ(100px);
+        }
+
+        article:hover section:nth-child(1) {
+            transform: translate(-200px);
+        }
+
+        article:hover section:nth-child(2) {
+            transform: translate(200px);
+        }
+
+        article:hover section:nth-child(3) {
+            transform: rotatex(90deg) translate(200px);
+        }
+
+        article:hover section:nth-child(4) {
+            transform: rotatex(90deg) translate(-200px);
+        }
+
+        article:hover section:nth-child(5) {
+            transform: rotatey(90deg) translatez(-200px);
+        }
+
+        article:hover section:nth-child(6) {
+            transform: rotatey(90deg) translatez(200px);
+        }
+
+        @keyframes play {
+            to {
+                transform: rotate3d(1, 1, 1, 360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <article>
+        <section>
+            <span></span>
+        </section>
+        <section>
+            <span></span>
+            <span></span>
+        </section>
+        <section>
+            <span></span>
+            <span></span>
+            <span></span>
+        </section>
+        <section>
+            <div>
+                <span></span>
+                <span></span>
+            </div>
+            <div>
+                <span></span>
+                <span></span>
+            </div>
+        </section>
+        <section>
+            <div>
+                <span></span>
+                <span></span>
+            </div>
+            <div>
+                <span></span>
+            </div>
+            <div>
+                <span></span>
+                <span></span>
+            </div>
+        </section>
+        <section>
+            <div>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </section>
+    </article>
+</body>
+
+</html>
