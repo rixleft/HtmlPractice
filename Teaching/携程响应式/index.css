@@ -152,3 +152,8 @@ section .banner form p {
 .banner ul li:nth-child(5)::before {
     background-position-y: -320rem;
 }
+
+.list {
+    display: grid;
+    grid-template: ;
+}
