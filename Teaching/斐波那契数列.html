@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 斐波那契数列练习
+        // 测试1
+        var num1 = 0
+        var num2 = 1
+        var num3 = 0
+        for (i = 1; i <= 20; i++) {
+            if (i <= 20) {
+                num3 = num1 + num2;
+                console.log(num2);
+                num1 = num2;
+                num2 = num3;
+            }
+        }
+        console.log(2 * num2 + num1 - 1);
+        // 测试2
+        var num1 = 0
+        var num2 = 1
+        var num3 = 0
+        for (i = 1; i < 5; i++) {
+            if (i < 5) {
+                num3 = num1 + num2;
+                num1 = num2;
+            }
+            num2 = num3;
+            console.log(num2);
+        }
+        console.log(2 * num2 + num1 - 1);
+        //测试3
+        var num1 = 0
+        var num2 = 1
+        for (i = 1; i <= 10; i++) {
+            if (i <= 10) {
+                num1 = num1 + num2;
+                num2 = num1 + num2;
+                // console.log(num2);
+            }
+        }
+        console.log(2 * num2 + num1 - 1);
+
+
+        // 斐波那契数  正确方法
+
+        // 首先来实现一下获取指定项的斐波那契数，即获取该数组中第 n 项的值；    
+
+        // 方法一
+        function getFebNum(n) {
+            if (n == 1 || n == 2) {
+                return 1;
+            } else {
+                return getFebNum(n - 1) + getFebNum(n - 2);
+            }
+        }
+        // 使用递归的思路，便于理解代码量也少，但是其算法复杂度较大，当 n 相当大的时候，程序运行也无比复杂。
+
+        // 方法二
+        function _getFebNum(n) {
+            if (n < 1) return 0;
+            let one = 1, // 初始为第 -2 项
+                two = 0, // 初始为第 -1 项
+                three = 0; // 初始为第 1 项
+            for (let i = 1; i <= n; i++) {
+                three = one + two;
+                one = two;
+                two = three;
+            }
+            return three;
+        }
+
+        // 斐波那契数列
+
+        // 方法一
+        function getFebArr(n) {
+            let arr = [];
+            for (let i = 1; i <= n; i++) {
+                arr.push(getFebNum(i));
+            }
+            return arr;
+        }
+        // 这个方法通过挨个获取斐波那契数，最后组成一个斐波那契数列，需要用到前面的 getFebNum 函数；
+
+        // 方法二
+        function _getFebArr(n) {
+            let arr = [];
+            if (n < 1) return arr;
+            let one = 1,
+                two = 0,
+                three = 0;
+            for (let i = 1; i <= n; i++) {
+                three = one + two;
+                arr.push(three);
+                one = two;
+                two = three;
+            }
+            return arr;
+        }
+        // 方法二利用之前 _getFebNum 方法的思路，递推地填充斐波那契数列，降低了算法复杂度；
+
+
+
+
+
+
+        // 普通递归
+        function fibonacci(n) {
+            if (n == 1 || n == 2) {
+                return 1
+            };
+            return fibonacci(n - 2) + fibonacci(n - 1);
+        }
+        fibonacci(30);
+
+        // 改进递归，避免重复计算
+        function fibonacci(n) {
+            function fib(n, v1, v2) {
+                if (n == 1)
+                    return v1;
+                if (n == 2)
+                    return v2;
+                else
+                    return fib(n - 1, v2, v1 + v2)
+            }
+            return fib(n, 1, 1)
+        }
+        fibonacci(30);
+
+
+        // 改进递归，利用闭包特性把运算结果存储在数组里，避免重复计算
+        var fibonacci = function () {
+            let memo = [0, 1];
+            let fib = function (n) {
+                if (memo[n] == undefined) {
+                    memo[n] = fib(n - 2) + fib(n - 1)
+                }
+                return memo[n]
+            }
+            return fib;
+        }()
+        fibonacci(30);
+
+
+        // 改进递归-摘出存储计算结果的功能函数
+        var memoizer = function (func) {
+            let memo = [];
+            return function (n) {
+                if (memo[n] == undefined) {
+                    memo[n] = func(n)
+                }
+                return memo[n]
+            }
+        };
+        var fibonacci = memoizer(function (n) {
+            if (n == 1 || n == 2) {
+                return 1
+            };
+            return fibonacci(n - 2) + fibonacci(n - 1);
+        })
+        fibonacci(30);
+
+
+
+        // 普通for循环
+        function fibonacci(n) {
+            var n1 = 1, n2 = 1, sum;
+            for (let i = 2; i < n; i++) {
+                sum = n1 + n2
+                n1 = n2
+                n2 = sum
+            }
+            return sum
+        }
+        fibonacci(30);
+
+
+        var fibonacci = function (n) {
+            let n1 = 1; n2 = 1;
+            for (let i = 2; i < n; i++) {
+                [n1, n2] = [n2, n1 + n2]
+            }
+            return n2
+        }
+        fibonacci(30)
+
+
+    </script>
+</body>
+
+</html>
