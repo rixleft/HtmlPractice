@@ -22,16 +22,16 @@
         // }
         // console.log(rev(a = Number(prompt("请输入一个数"))));
 
-        //方法二
-        function sum(a) {
-            var s = 0;
-            while (a) {
-                s = s * 10 + a % 10;
-                a = parseInt(a / 10);
-            }
-            return s;
-        }
-        console.log(sum(a = +prompt("请输入一个数")));
+        // //方法二
+        // function sum(a) {
+        //     var s = 0;
+        //     while (a) {
+        //         s = s * 10 + a % 10;
+        //         a = parseInt(a / 10);
+        //     }
+        //     return s;
+        // }
+        // console.log(sum(a = +prompt("请输入一个数")));
 
         // // 方法三
         // function rev(num) {
@@ -75,23 +75,23 @@
         // fn(a = Number(prompt("请输入一个数")));
 
 
-        // // 第二种方式
-        // function fn(a) {
-        //     var sum = 0;
-        //     for (i = 1; i < a; i++) {
-        //         if (a % i == 0) {
-        //             sum += i;
-        //         }
-        //     }
-        //     return sum;
-        // }
-        // var num = Number(prompt("请输入一个数"));
-        // for (j = 1; j < num; j++) {
-        //     var num1 = fn(j);
-        //     if (j == fn(num1) && j != num1) {
-        //         console.log(j + "和" + num1 + "是亲密数");
-        //     }
-        // }
+        // 第二种方式
+        function fn(a) {
+            var sum = 0;
+            for (i = 1; i < a; i++) {
+                if (a % i == 0) {
+                    sum += i;
+                }
+            }
+            return sum;
+        }
+        var num = Number(prompt("请输入一个数"));
+        for (j = 1; j < num; j++) {
+            var num1 = fn(j);
+            if (j == fn(num1) && j != num1) {
+                console.log(j + "和" + num1 + "是亲密数");
+            }
+        }
 
         // // 三千以内的亲密数
         // function yueshuhe(num) {// 封装一个不包含自己的约束和的方法
@@ -186,7 +186,7 @@
         //         result += numToChinese(num % 10);   //调用映射函数
         //         num = parseInt(num / 10);
         //     }
-        //     return result
+        //     return result;
         // }
         // var i = prompt("请输入一个数");
         // console.log(rev(i));
