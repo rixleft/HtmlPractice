@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      //   练习一;
+      //   请对[1, 2, 2, 3, 2, 4, 5, 2, 3, 3, 4, 1]数组去重(数组中不能有相同的两项)。
+      //   结果：[1, 2, 3, 4, 5]
+
+      var arr = [1, 2, 2, 3, 2, 4, 5, 2, 3, 3, 4, 1];
+      function fn(arr) {
+        for (i = 0; i < arr.length; i++) {
+          for (j = i + 1; j < arr.length; j++) {
+            if (arr[i] == arr[j]) {
+              arr.splice(j, 1);
+              j--;
+            }
+          }
+        }
+        return arr;
+      }
+      console.log(fn(arr));
+
+      //非标准答案
+      var arr = [1, 2, 2, 3, 2, 4, 5, 2, 3, 3, 4, 1];
+      var empty = [];
+      var newArray = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (!empty[arr[i]]) {
+          empty[arr[i]] = true;
+          newArray.push(arr[i]);
+        }
+      }
+      console.log(newArray);
+
+      // 练习二
+      // 将以下三个数组合并一维数组（数组成员只能是字符串），并去重。
+      var arr1 = ["a", "b", "c"];
+      var arr2 = ["b", "c"];
+      var arr3 = ["c", ["d", "e"], "e", ["c", ["d", ["e"]]]];
+      // 结果：[a, b, c, b, c, c, d, e, e, c, d, e]
+
+      function connect() {
+        var newArray = [];
+        function fn1(arr) {
+          var result = [];
+          for (var i = 0; i < arr.length; i++) {
+            if (typeof arr[i] === "object") {
+              result = result.concat(fn1(arr[i]));
+            } else {
+              result.push(arr[i]);
+            }
+          }
+          return result;
+        }
+      }
+
+      console.log(connect(arr3));
+      // 如何使用函数将传入的数组全部拼接起来并且返回一维数组？
+      function fn(arr) {
+        for (i = 0; i < arr.length; i++) {
+          for (j = i + 1; j < arr.length; j++) {
+            if (arr[i] == arr[j]) {
+              arr.splice(j, 1);
+              j--;
+            }
+          }
+        }
+        return arr;
+      }
+      console.log(fn(arr));
+
+      // //练习三
+      // 使用数组方法，将["春", "夏", "秋", "冬"]; 修改成["夏", "春", "冬", "秋"];
+      // var arr = ["夏", "春", "冬", "秋"];
+      // var arr = ["春", "夏", "秋", "冬"];
+      // //第一种
+      // var arr = ["春", "夏", "秋", "冬"];
+      // var newArray1 = [arr.shift()].concat(arr.pop());
+      // var newArray2 = [arr.shift()].concat(newArray1).concat(arr.pop());
+      // console.log(newArray2);
+      // //第二种
+      // var arr = ["春", "夏", "秋", "冬"];
+      // var arr1 = [arr.shift()].concat([arr.shift()].concat(arr.pop())).concat(arr.pop());
+      // console.log(arr1);
+      // //第三种
+      // var arr = ["春", "夏", "秋", "冬"];
+      // arr.push(arr.shift(), arr.pop(), arr.pop());
+      // console.log(arr);
+
+      // // //练习四
+      // // 编写一个函数，返回数组指定位置的值
+      // // 如：
+      // // var arr = [1, 2, 3, 4];
+      // // console.log(getValue(arr, 1)); // 2
+
+      // var arr = [1, 2, 3, 4];
+      // function getValue(a, b) {
+      //     return a[b];
+      // }
+      // console.log(getValue(arr, 1));
+    </script>
+  </body>
+</html>

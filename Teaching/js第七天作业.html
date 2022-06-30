@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      //练习一：
+      // 找出数组中的所有偶数，并保存到一个新数组中。
+      var arr = [12, 17, 38, 56, 31, 75, 93, 114, 215, 216];
+      function fn(arr1) {
+        var newArray = [];
+        for (i = 0; i < arr1.length; i++) {
+          if (arr1[i] % 2 === 0) {
+            newArray.push(arr1[i]);
+          }
+        }
+        return newArray;
+      }
+
+      console.log(fn(arr));
+
+      // 练习二：
+
+      var players = [
+        { name: "小明", score: 435, times: 19 },
+        { name: "小红", score: 376, times: 23 },
+        { name: "李雷", score: 457, times: 28 },
+        { name: "韩梅梅", score: 412, times: 35 },
+        { name: "张三", score: 298, times: 12 },
+      ];
+      //第一种方法
+      function getData(array, attribute, number) {
+        array.sort(function (a, b) {
+          if (number > 0) {
+            return a[attribute] - b[attribute];
+          } else {
+            return b[attribute] - a[attribute];
+          }
+        });
+      }
+      getData(players, "score", -1);
+      console.log(players);
+
+      // 第二种方法
+      function getData(array, attribute, order) {
+        array.sort(function (object1, object2) {
+          return (object1[attribute] - object2[attribute]) * order;
+        });
+      }
+      getData(players, "score", 1);
+      console.log(players);
+    </script>
+  </body>
+</html>
