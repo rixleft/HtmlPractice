@@ -1,159 +1,157 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 html {
-    font-size: calc(100vw / 640);
+  font-size: calc(100vw / 640);
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
 img {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
-    height: 120rem;
-    display: flex;
-    /* background: red; */
-    align-items: center;
+  height: 120rem;
+  display: flex;
+  /* background: red; */
+  align-items: center;
 }
 
-
 header h2 {
-    margin: 0 24rem;
-    width: 72rem;
-    height: 72rem;
-    font-size: 0;
-    background: url(./img/app.png) no-repeat;
-    background-size: cover;
-
+  margin: 0 24rem;
+  width: 72rem;
+  height: 72rem;
+  font-size: 0;
+  background: url(./img/app.png) no-repeat;
+  background-size: cover;
 }
 
 header div {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 header div h3 {
-    font-weight: 700;
-    font-size: 24rem;
-    margin-bottom: 8rem;
+  font-weight: 700;
+  font-size: 24rem;
+  margin-bottom: 8rem;
 }
 
 header div p {
-    font-size: 14rem;
-    color: #999;
+  font-size: 14rem;
+  color: #999;
 }
 
 header button {
-    font-size: 24rem;
-    color: #fff;
-    height: 48rem;
-    width: 140rem;
-    margin-right: 24rem;
-    border-radius: 24rem;
-    border: none;
-    background: #298ff4;
+  font-size: 24rem;
+  color: #fff;
+  height: 48rem;
+  width: 140rem;
+  margin-right: 24rem;
+  border-radius: 24rem;
+  border: none;
+  background: #298ff4;
 }
 
 section {
-    flex-grow: 1;
-    overflow: auto;
+  flex-grow: 1;
+  overflow: auto;
 }
 
 section .banner {
-    width: 100%;
-    height: 350rem;
-    background: url(./img/banner.jpg) no-repeat;
-    background-size: cover;
+  width: 100%;
+  height: 350rem;
+  background: url(./img/banner.jpg) no-repeat;
+  background-size: cover;
 }
 
 section .banner form {
-    height: 90rem;
-    display: flex;
-    align-items: center;
+  height: 90rem;
+  display: flex;
+  align-items: center;
 }
 
 section .banner form input {
-    flex-grow: 1;
-    height: 50rem;
-    line-height: 50rem;
-    padding-left: 50rem;
-    margin-left: 25rem;
-    text-align: center;
-    color: #999;
-    font-size: 24rem;
-    border: none;
-    border-radius: 25rem;
-    background: url(./img/search.png) 25rem center no-repeat #fff;
-    background-size: 25rem;
+  flex-grow: 1;
+  height: 50rem;
+  line-height: 50rem;
+  padding-left: 50rem;
+  margin-left: 25rem;
+  text-align: center;
+  color: #999;
+  font-size: 24rem;
+  border: none;
+  border-radius: 25rem;
+  background: url(./img/search.png) 25rem center no-repeat #fff;
+  background-size: 25rem;
 }
 
 section .banner form p {
-    text-align: center;
-    color: #fff;
-    line-height: 150rem;
-    font-size: 24rem;
-    height: 90rem;
-    width: 120rem;
-    background: url(./img/my.png) center 15rem no-repeat;
-    background-size: 35%;
+  text-align: center;
+  color: #fff;
+  line-height: 150rem;
+  font-size: 24rem;
+  height: 90rem;
+  width: 120rem;
+  background: url(./img/my.png) center 15rem no-repeat;
+  background-size: 35%;
 }
 
 .banner ul {
-    margin: 200rem 24rem 0;
-    background: #fff;
-    border-radius: 20rem;
-    display: flex;
+  margin: 200rem 24rem 0;
+  background: #fff;
+  border-radius: 20rem;
+  display: flex;
 }
 
 .banner ul li {
-    flex-grow: 1;
-    text-align: center;
-    padding-bottom: 10rem;
-    font-size: 20rem;
+  flex-grow: 1;
+  text-align: center;
+  padding-bottom: 10rem;
+  font-size: 20rem;
 }
 
 .banner ul li::before {
-    content: "";
-    display: block;
-    height: 80rem;
-    width: 80rem;
-    margin: 0 auto;
-    background: url(./img/tabs.png) no-repeat;
-    background-size: 80rem;
+  content: "";
+  display: block;
+  height: 80rem;
+  width: 80rem;
+  margin: 0 auto;
+  background: url(./img/tabs.png) no-repeat;
+  background-size: 80rem;
 }
 
 .banner ul li:nth-child(2)::before {
-    background-position-y: -80rem;
+  background-position-y: -80rem;
 }
 
 .banner ul li:nth-child(3)::before {
-    background-position-y: -160rem;
+  background-position-y: -160rem;
 }
 
 .banner ul li:nth-child(4)::before {
-    background-position-y: -240rem;
+  background-position-y: -240rem;
 }
 
 .banner ul li:nth-child(5)::before {
-    background-position-y: -320rem;
+  background-position-y: -320rem;
 }
 
 .list {
-    display: grid;
-    grid-template: ;
+  display: grid;
+  grid-template: ;
 }

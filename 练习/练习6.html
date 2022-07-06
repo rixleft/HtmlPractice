@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .w {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        ul {
+            display: flex;
+            justify-self: center;
+            align-items: center;
+        }
+
+        ul li {
+            flex: 1;
+            height: 30px;
+            list-style: none;
+            background: yellow;
+        }
+
+        section {
+            position: relative;
+            height: 200px;
+            justify-self: center;
+            align-items: center;
+        }
+
+        div {
+            position: absolute;
+            width: 400px;
+            height: 200px;
+            background: red;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="w">
+        <li>1</li>
+        <li>2</li>
+    </ul>
+    <section class="w">
+        <div>3</div>
+        <!-- <div>4</div> -->
+    </section>
+    <script>
+
+
+        var sec_div = document.getElementsByTagName("div");
+        var ul_li = document.getElementsByTagName("li");
+        var div_height = 0;
+        var div_interval;
+        ul_li[0].onclick = function () {
+            clearInterval(div_interval);
+            div_interval = setInterval(function () {
+                div_height += 10;
+                if (div_height >= 400) {
+                    div_height = 400;
+                    clearInterval(div_interval);
+                }
+                console.log(div_height);
+                sec_div[0].style.height = div_height + "px";
+            }, 20);
+        };
+        ul_li[1].onclick = function () {
+            clearInterval(div_interval);
+            div_interval = setInterval(function () {
+                div_height -= 10;
+                if (div_height <= 0) {
+                    div_height = 0;
+                    clearInterval(div_interval);
+                }
+                sec_div[0].style.height = div_height + "px";
+            }, 20);
+        };
+
+
+    </script>
+</body>
+
+</html>

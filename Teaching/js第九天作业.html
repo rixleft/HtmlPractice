@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // // 取数字
+      // var str = "abc123def456jlkl789afd";
+      // var arr = [],
+      //   tmp = "";
+      // for (var i = 0; i < str.length; i++) {
+      //   if (str[i] >= 0 && str[i] <= 9) {
+      //     tmp += str[i];
+      //   } else {
+      //     if (tmp) {
+      //       arr.push(tmp);
+      //       tmp = "";
+      //     }
+      //   }
+      // }
+      // console.log(arr);
+
+      // 第一题
+      /* 练习一：
+               var str = '132qwe789ioj31cxz890';
+                 将字符串 str 中的数字替换成中文的 一二三..九 格式
+                 将字母转成大写
+                 输出结果：
+                   '一三二QWE七八九IOJ三一CXZ八九零'; */
+
+      // var str = "132qwe789ioj31cxz890";
+      // var chinese = [
+      //   "零",
+      //   "一",
+      //   "二",
+      //   "三",
+      //   "四",
+      //   "五",
+      //   "六",
+      //   "七",
+      //   "八",
+      //   "九",
+      // ];
+
+      /*  //第一种方法
+      var re = /\d/g;
+      str = str.replace(re, function (i) {
+        return chinese[i];
+      });
+      console.log(str.toUpperCase()); */
+
+      /*  // 第二种方法
+       function shift(arr) {
+         arr = arr.toUpperCase().split("");
+         for (i = 0; i < arr.length; i++) {
+           if (arr[i] >= 0 && arr[i] <= 9) {
+             arr.splice(i, 1, chinese[arr[i]]);
+            }
+          }
+          return arr.join("");
+        }
+        console.log(shift(str)); */
+
+      /*   // 第三种方法
+        var arr = str.toUpperCase().split("");
+        for (var i = 0; i < arr.length; i++) {
+          if (!isNaN(arr[i])) {
+            arr[i] = chinese[arr[i]];
+          }
+        }
+        console.log(arr.join(""));
+        */
+
+      /* // 第四种方法    ES5 && ES6 语法
+      var result = str
+        .split("")
+        .map((v) => (isNaN(v) ? v.toUpperCase() : chinese[v]))
+        .join("");
+      console.log(result); */
+
+      /* // 第五种方法     用字符的unicode码做差
+      var arr = str.split("");
+      for (var i = 0; i < arr.length; i++) {
+        var num = arr[i].charCodeAt();
+        if (num > 96 && num < 123) {
+          arr[i] = String.fromCharCode(num - 32);
+        } else {
+          arr[i] = chinese[arr[i]];
+        }
+      }
+      console.log(arr.join("")); */
+
+      /*  // 第二题
+      var code = 'qW89zu9e3br4IEvO6n5x';
+      处理字符串 code，每五个字符为一组，中间用-分隔。
+      输出结果：
+      'qW89z-u9e3b-r4IEv-O6n5x'  */
+
+      var code = "qW89zu9e3br4IEvO6n5x";
+
+      /* // 第一种方法
+      var code = "qW89zu9e3br4IEvO6n5x";
+      console.log(code.match(/.{5}/g).join("-")); */
+
+      /* // 第二种方法
+      function creatNewArray(arr) {
+        arr = arr.split("");
+        for (i = 0; i < arr.length; i++) {
+          if (i % 6 == 0) {
+            arr.splice(i, 0, "-");
+          }
+        }
+        arr.shift();
+        return arr.join("");
+      }
+      console.log(creatNewArray(code)); */
+
+      /*   // 第三种方法
+      var arr = code.split("");
+      var result = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (i % 5 == 0 && i != 0) {
+          result.push("-");
+        }
+        result.push(arr[i]);
+      }
+      console.log(result.join("")); */
+
+      /*  // 第四种方法
+      var arr = code.split("");
+      for (var i = arr.length - 1; i > 0; i--) {
+        if (i % 5 == 0) {
+          arr.splice(i, 0, "-");
+        }
+      }
+      console.log(arr.join("")); */
+    </script>
+  </body>
+</html>

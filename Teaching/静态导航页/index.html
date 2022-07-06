@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>首页</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="all.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+    <!-- 个人介绍和备忘录 -->
+    <header class="w">
+        <section>
+            <p>rixleft，一个聪明帅气的小伙子，这里是他的个人静态导航页1.0版本。</p>
+        </section>
+        <div>
+            <textarea name="" id="" placeholder="今天要做什么事呢？"></textarea>
+            <button>保存</button>
+        </div>
+    </header>
+    <!-- 搜索框 -->
+    <form class="w">
+        <input type="search" placeholder="请输入内容......" autofocus="autofocus">
+    </form>
+    <!-- 导航栏 -->
+    <nav>
+        <ul class="w" id="nav_Id">
+            <li>今天ToDo</li>
+            <li>前端学习</li>
+            <li>网站导航</li>
+            <li>在线软件</li>
+            <li>申请网站</li>
+            <li>css布局</li>
+            <li>题库</li>
+            <li>文章</li>
+        </ul>
+        <section class="w" id="sec_Id">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+        </section>
+    </nav>
+    <script src="./jquery-1.12.4.js"></script>
+    <!-- 实现导航点击下拉和收回 -->
+    <script>
+        $('#nav_Id:eq(0)').click(function () {
+            $('#sec_Id:eq(0)').slideToggle(400);
+        });
+    </script>
+</body>
+
+</html>
