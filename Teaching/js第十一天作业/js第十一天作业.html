@@ -17,7 +17,7 @@
             width: 768px;
             height: 432px;
             margin: 150px auto;
-            /* overflow: hidden; */
+            overflow: hidden;
         }
 
         section nav {
@@ -78,22 +78,20 @@
         var sec = document.getElementsByTagName("section"); //类数组，有下标
         var lef = document.getElementById('lef');  //普通对象，无下标
         var rig = document.getElementById('rig');  //普通对象，无下标
-        var clickTimes = 1;
+        var clickTimes = 0;
         lef.onclick = function () {
-            nav[0].style.marginLeft = (((clickTimes - 1) % 5) * parseInt(getComputedStyle(sec[0]).width) - 3072) + "px";
-            clickTimes++;
+            clickTimes--;
+            clickEvents();
             return console.log(nav[0].style.marginLeft);
         }
         rig.onclick = function () {
-            nav[0].style['marginLeft'] = -((clickTimes % 5) * parseInt(getComputedStyle(sec[0]).width)) + "px";
             clickTimes++;
-            return console.log(nav[0].style['marginLeft']);
-
+            clickEvents();
         }
-
-
-
-
+        function clickEvents() {
+            clickTimes = (clickTimes + pho.length) % pho.length;
+            nav[0].style.marginLeft = -(clickTimes * parseInt(getComputedStyle(sec[0]).width)) + "px";
+        }
     </script>
 </body>
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            display: inline-block;
+            background: #999;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <span>上移000</span>
+            <span>下移000</span>
+        </li>
+        <li>
+            <span>上移111</span>
+            <span>下移111</span>
+        </li>
+        <li>
+            <span>上移222</span>
+            <span>下移222</span>
+        </li>
+        <li>
+            <span>上移333</span>
+            <span>下移333</span>
+        </li>
+        <li>
+            <span>上移444</span>
+            <span>下移444</span>
+        </li>
+        <li>
+            <span>上移555</span>
+            <span>下移555</span>
+        </li>
+    </ul>
+    <input type="button" value="正序">
+    <input type="button" value="倒序">
+    <script src="./jquery-1.12.4.js"></script>
+    <script>
+        var $ul = $("ul");
+        var $li = $("li");
+        var $span = $("span");
+        var $btn = $("input");
+        var arr = [];
+        arr.push($li.index());
+        console.log(arr);
+        btn[0].onclick = function () {
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            margin: 100px 100px;
+            width: 100px;
+            height: 25px;
+            background: rgb(236, 31, 31);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button>创建</button>
+    <!-- <script src="./jquery-1.12.4.js"></script> -->
+    <script>
+        var btn = document.getElementsByTagName("button");
+        btn[0].onclick = fn;
+        function fn() {
+            var ul = document.createElement("ul");
+            for (var i = 0; i < 5; i++) {
+                var li = document.createElement("li");
+                for (var j = 0; j < 2; j++) {
+                    var box = document.createElement("span");
+                    if (j == 0) {
+                        li.appendChild(box);
+                        box.innerHTML = "上移" + (i + 1);
+                    } else {
+                        li.appendChild(box);
+                        box.innerHTML = " 下移" + (i + 1);
+                    }
+                    box.setAttribute("style", "text-align:center;display:inline-block;height:25px;width:100px;background:gray;margin:5px;");
+                };
+                ul.appendChild(li);
+
+            }
+            // var timeout = setTimeout(function () {
+            for (var z = 0; z < 2; z++) {
+                var a = document.createElement("a");
+                switch (z) {
+                    case 0:
+                        a.innerHTML = "正序";
+                        break;
+                    case 1:
+                        a.innerHTML = "倒序";
+                        break;
+                }
+                document.body.appendChild(a);
+                a.setAttribute("style", "display:inline-block;text-align:center;height:25px;width:100px;margin-left:35px;");
+                a.setAttribute("href", "###");
+            };
+            // }, 100);
+            var a = document.body.getElementsByTagName("a");
+            a[1].onclick = fn1;
+            document.body.appendChild(ul);
+        }
+        function fn1() {
+            var ul = document.getElementsByTagName("ul");
+            var li = document.getElementsByTagName("li");
+            // var div = document.getElementsByTagName("div");
+            var arr = [];
+            for (var i = 0; i < li.length; i++) {
+                // arr.push(ul[0].childNodes[i].childNodes[0].innerHTML.match(/\d/g)[0]);
+                li[i].index = i;
+                arr.push(ul[0].childNodes[i].index);
+                // console.log(ul[0].childNodes[i].match(/\d/g));
+            };
+            arr.sort(function (a, b) {
+                return a - b;
+            });
+            for (var j = 0; j < arr.length; j++) {
+                ul[0].appendChild(li[j].index);
+                console.log(li[j])
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

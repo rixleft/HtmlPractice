@@ -17,11 +17,11 @@
             width: 768px;
             height: 432px;
             margin: 150px auto;
-            overflow: hidden;
+            /* overflow: hidden; */
         }
 
         section nav {
-            width: 3840px;
+            width: 4608px;
             height: 432px;
         }
 
@@ -54,8 +54,28 @@
         #rig {
             right: 0;
             border-radius: 15px 0 0 15px;
+        }
 
+        ul {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            margin-left: -50px;
+        }
 
+        ul li {
+            display: inline-block;
+            cursor: pointer;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            margin: 5px;
+            border-radius: 50%;
+            background: #fff;
+        }
+
+        .current {
+            background: red;
         }
     </style>
 </head>
@@ -69,29 +89,58 @@
             <img src="./3.jpg" alt="">
             <img src="./4.png" alt="">
             <img src="./5.jpg" alt="">
+            <img src="./1.jpg" alt="">
         </nav>
         <div id="rig">&gt;</div>
+        <ul>
+            <li class="current"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
     </section>
 
     <script src="./jquery-1.12.4.js"></script>
     <script>
         var clickTimes = 0;
-
+        var lock = false;
         $("#lef").on('click', function () {
+            if (lock) { return; };
             clickTimes--;
+            if (clickTimes < 0) {
+                clickTimes = (clickTimes + $('img').size()) % $("img").length;
+                $("nav").css({ marginLeft: (-clickTimes * parseInt($("section").css('width'))) });
+                clickTimes--;
+            }
             clickEvents();
+
         });
         $("#rig").on('click', function () {
+            if (lock) { return; };
             clickTimes++;
+            if (clickTimes == $("img").length) {
+                clickTimes = 0;
+                $("nav").css({ marginLeft: (-clickTimes * parseInt($("section").css('width'))) });
+                clickTimes++;
+            }
             clickEvents();
         });
         function clickEvents() {
+            lock = true;
             clickTimes = (clickTimes + $('img').size()) % $("img").length;
-            $("nav").css('margin-left', (-clickTimes * parseInt($("section").css('width'))));
-        }
+            $("nav").animate({ marginLeft: (-clickTimes * parseInt($("section").css('width'))) }, function () {
+                if (!$("nav").is(":animated")) {
+                    lock = false;
+                };
+            });
 
-
-
+        };
+        $("li").click(function () {
+            clickTimes = $(this).index();
+            $("li").removeClass().eq(clickTimes).addClass("current");
+            clickEvents();
+        })
 
     </script>
 </body>
