@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-size: 30px;
+        }
+
+        input {
+            font-size: 30px;
+        }
+
+        p {
+            padding-left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <ul id="list">
+        <li>
+            <input type="button" value="上移00">
+            <input type="button" value="下移00">
+        </li>
+        <li>
+            <input type="button" value="上移11">
+            <input type="button" value="下移11">
+        </li>
+        <li>
+            <input type="button" value="上移22">
+            <input type="button" value="下移22">
+        </li>
+        <li>
+            <input type="button" value="上移33">
+            <input type="button" value="下移33">
+        </li>
+        <li>
+            <input type="button" value="上移44">
+            <input type="button" value="下移44">
+        </li>
+    </ul>
+    <p>
+        <a href="###">正序</a>
+        <a href="###">倒序</a>
+    </p>
+
+    <script>
+        // 查找下一个节点类型为元素节点的兄弟节点
+        function next(obj) {
+            // 判断如果 Obj 为假值，或者 没有下一个兄弟节点
+            if (!obj || !obj.nextSibling) { return null; }
+
+            // if ( obj.nextSibling.nodeType === 1 ) {
+            //   return obj.nextSibling;
+            // } else {
+            //   return next(obj.nextSibling);
+            // }
+            return obj.nextSibling.nodeType === 1 ? obj.nextSibling : next(obj.nextSibling);
+
+        }
+
+        // 查找上一个类型为元素节点的兄弟节点
+        function prev(obj) {
+            if (!obj || !obj.previousSibling) { return null; }
+            return obj.previousSibling.nodeType === 1 ? obj.previousSibling : prev(obj.previousSibling);
+        }
+
+        // 查找指定元素的第一个子元素节点
+        function first(obj) {
+            if (!obj || !obj.firstChild) { return null; }
+            return obj.firstChild.nodeType === 1 ? obj.firstChild : next(obj.firstChild);
+        }
+
+        // 查找指定元素的最后一个子元素节点
+        function last(obj) {
+            if (!obj || !obj.lastChild) { return null; }
+            return obj.lastChild.nodeType === 1 ? obj.lastChild : prev(obj.lastChild);
+        }
+
+        // 将类数组转换成普通数组
+        function eles2Arr(elements) {
+            // var eleArr = [];
+            // for (var i=0; i<elements.length; i++) {
+            //   eleArr.push(elements[i]);
+            // }
+            // // console.log(eleArr);
+            // return eleArr;
+            return [].slice.call(elements);
+        }
+
+
+
+        var list = document.getElementById('list');
+        // getElementsByTagName() 获取到的是一个类数组对象
+        var lis = list.getElementsByTagName('li');
+        var aBtns = document.getElementsByTagName('a');
+
+        // 将类数组转换成普通数组，目的是可以使用数组的sort方法。
+        var liArr = eles2Arr(lis);
+
+        // console.log(liArr);
+
+        aBtns[0].onclick = function () {
+            liArr.sort(function (li1, li2) {
+                var num1 = li1.innerHTML.match(/\d+/g)[0];
+                var num2 = li2.innerHTML.match(/\d+/g)[0];
+                // console.log(li1.innerHTML, li1.innerHTML.match(/\d+/g));
+
+                // return li1 - li2;
+                return num1 - num2;
+            });
+
+            for (var i = 0; i < liArr.length; i++) {
+                list.appendChild(liArr[i]);
+            }
+
+            console.log('正序');
+        };
+
+        aBtns[1].onclick = function () {
+
+            liArr.sort(function (li1, li2) {
+                var num1 = li1.innerHTML.match(/\d+/g)[0];
+                var num2 = li2.innerHTML.match(/\d+/g)[0];
+                // console.log(li1.innerHTML, li1.innerHTML.match(/\d+/g));
+
+                // return li1 - li2;
+                return num2 - num1;
+            });
+
+            for (var i = 0; i < liArr.length; i++) {
+                list.appendChild(liArr[i]);
+            }
+
+            console.log('倒序', liArr);
+        };
+
+
+
+        for (var i = 0; i < lis.length; i++) {
+            moveNode(i);
+        }
+
+        function moveNode(index) {
+            var btns = lis[index].getElementsByTagName('input');
+
+            btns[0].onclick = function () {
+                var parent = this.parentNode;
+
+                if (first(list) == parent) {
+                    alert('已经是第一个啦！');
+                    return;
+                }
+
+                list.insertBefore(parent, prev(parent));
+
+            };
+
+            btns[1].onclick = function () {
+                var parent = this.parentNode;
+
+                if (last(list) == parent) {
+                    alert('已经是最后一个啦！');
+                    return;
+                }
+
+                list.insertBefore(next(parent), parent);
+
+            };
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
