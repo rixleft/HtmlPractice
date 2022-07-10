@@ -22,8 +22,11 @@
     <!-- <script src="./jquery-1.12.4.js"></script> -->
     <script>
         var btn = document.getElementsByTagName("button");
-        btn[0].onclick = fn;
-        function fn() {
+        var div = document.createElement("div");
+        document.body.appendChild(div);
+        // div.setAttribute("id", "div");
+        btn[0].onclick = clickBulid;
+        function clickBulid() {
             var ul = document.createElement("ul");
             for (var i = 0; i < 5; i++) {
                 var li = document.createElement("li");
@@ -38,52 +41,85 @@
                     }
                     box.setAttribute("style", "text-align:center;display:inline-block;height:25px;width:100px;background:gray;margin:5px;");
                 };
-                ul.appendChild(li);
 
             }
+            ul.appendChild(li);
             // var timeout = setTimeout(function () {
             for (var z = 0; z < 2; z++) {
                 var a = document.createElement("a");
-                switch (z) {
-                    case 0:
-                        a.innerHTML = "正序";
-                        break;
-                    case 1:
-                        a.innerHTML = "倒序";
-                        break;
+                document.body.div.appendChild(a);
+                if (z == 1) {
+                    a.innerHTML = "倒序";
+                } else {
+                    a.innerHTML = "正序";
                 }
-                document.body.appendChild(a);
+                // switch (z) {
+                //     case 0:
+                //         a.innerHTML = "正序";
+                //         break;
+                //     case 1:
+                //         a.innerHTML = "倒序";
+                //         break;
+                // }
                 a.setAttribute("style", "display:inline-block;text-align:center;height:25px;width:100px;margin-left:35px;");
                 a.setAttribute("href", "###");
+                console.log(a);
             };
+            var links = document.getElementsByTagName("a");
+            a[1].onclick = rank1;
+            a[0].onclick = rank0;
+            div.appendChild(ul);
             // }, 100);
-            var a = document.body.getElementsByTagName("a");
-            a[1].onclick = fn1;
-            document.body.appendChild(ul);
         }
-        function fn1() {
-            var ul = document.getElementsByTagName("ul");
-            var li = document.getElementsByTagName("li");
-            // var div = document.getElementsByTagName("div");
-            var arr = [];
+        var ul = document.getElementsByTagName("ul");
+        var li = document.getElementsByTagName("li");
+        // var span = document.getElementsByTagName("span");
+        var arr1 = [];
+        var arr2 = [];
+        function rank1() {
             for (var i = 0; i < li.length; i++) {
-                // arr.push(ul[0].childNodes[i].childNodes[0].innerHTML.match(/\d/g)[0]);
+                console.log(li.length);
+
                 li[i].index = i;
-                arr.push(ul[0].childNodes[i].index);
-                // console.log(ul[0].childNodes[i].match(/\d/g));
+                arr1.push(li[i])
+                arr2.push(ul[0].childNodes[i].childNodes[0].innerHTML.match(/\d/g)[0]);
             };
-            arr.sort(function (a, b) {
+            arr2.sort(function (a, b) {
+                return b - a;
+            });
+            for (var j = 0; j < arr1.length; j++) {
+                ul[0].appendChild(arr1[arr2[j] - 1]);
+            }
+        }
+        function rank0() {
+            for (var i = 0; i < li.length; i++) {
+                console.log(li.length);
+
+                li[i].index = i;
+                arr1.push(li[i])
+                arr2.push(ul[0].childNodes[i].childNodes[0].innerHTML.match(/\d/g)[0]);
+            };
+            arr2.sort(function (a, b) {
                 return a - b;
             });
-            for (var j = 0; j < arr.length; j++) {
-                ul[0].appendChild(li[j].index);
-                console.log(li[j])
+            for (var j = 0; j < arr1.length; j++) {
+                ul[0].appendChild(arr1[arr2[j] - 1]);
             }
-
-
-
         }
+        console.log(li.length);
 
+        // for (var i = 0; i < li.length; i++) {
+        //     console.log(111);
+        //     // li[i].index = i;
+        //     li[i].onclick = function () {
+        //         // ul[0].removeChild(li[i]);
+        //         if (i = 0) {
+        //             alert("已经是第一个啦!");
+        //         }
+        //         ul[0].insertBefore(li[i], li[i - 1]);
+        //     }
+
+        // }
 
 
 

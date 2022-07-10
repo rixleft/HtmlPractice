@@ -3,15 +3,3 @@ header {
   display: flex;
 
 }
-
-header .avater {
-  width: 200px;
-  height: 200px;
-}
-
-header .avater a {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  background: #111;
-}

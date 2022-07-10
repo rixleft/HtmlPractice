@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            margin: 100px 100px;
+            width: 100px;
+            height: 25px;
+            background: rgb(236, 31, 31);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button>创建</button>
+    <script>
+        var btn = document.getElementsByTagName("button");
+        var divition = document.createElement("div");
+        document.body.appendChild(divition);
+        btn[0].onclick = clickBulid;
+        function clickBulid() {
+            for (var z = 0; z < 2; z++) {
+                var a = document.createElement("a");
+                divition.appendChild(a);
+                if (z == 1) {
+                    a.innerHTML = "倒序";
+                } else {
+                    a.innerHTML = "正序";
+                }
+                a.setAttribute("style", "display:inline-block;text-align:center;height:25px;width:100px;margin-left:35px;");
+                a.setAttribute("href", "###");
+            };
+            var link = divition.getElementsByTagName("a");
+            link[1].onclick = rank1;
+            link[0].onclick = rank0;
+            var ul = document.createElement("ul");
+            for (var i = 0; i < 5; i++) {
+                var li = document.createElement("li");
+                for (var j = 0; j < 2; j++) {
+                    var box = document.createElement("span");
+                    if (j == 0) {
+                        li.appendChild(box);
+                        box.innerHTML = "上移" + (i + 1);
+                    } else {
+                        li.appendChild(box);
+                        box.innerHTML = " 下移" + (i + 1);
+                    }
+                    box.setAttribute("style", "text-align:center;display:inline-block;height:25px;width:100px;background:gray;margin:5px;");
+                };
+
+                ul.appendChild(li);
+            }
+            divition.appendChild(ul);
+            var unordered_list = divition.getElementsByTagName("ul");
+            var list = ul.getElementsByTagName("li");
+            var arr1 = [];
+            var arr2 = [];
+
+            function rank1() {
+                for (var i = 0; i < list.length; i++) {
+                    list[i].index = i;
+                    arr1.push(list[i])
+                    arr2.push(unordered_list[0].childNodes[i].childNodes[0].innerHTML.match(/\d/g)[0]);
+                };
+                arr2.sort(function (a, b) {
+                    return b - a;
+                });
+                for (var j = 0; j < arr1.length; j++) {
+                    unordered_list[0].appendChild(arr1[arr2[j] - 1]);
+                }
+                console.log(arr1);
+                console.log(arr2);
+            }
+            function rank0() {
+                for (var i = 0; i < list.length; i++) {
+                    list[i].index = i;
+                    arr1.push(list[i])
+                    arr2.push(unordered_list[0].childNodes[i].childNodes[0].innerHTML.match(/\d/g)[0]);
+                };
+                arr2.sort(function (a, b) {
+                    return a - b;
+                });
+                for (var j = 0; j < arr1.length; j++) {
+                    unordered_list[0].appendChild(arr1[arr2[j] - 1]);
+                }
+                console.log(arr2);
+            }
+            var span = li.getElementsByTagName("span");
+            list[0].onclick = spanUp;
+            list[1].onclick = spanDown;
+            function spanUp() {
+                var parent = this.parentNode;
+                if (unordered_list[0] == parent) {
+                    alert('已经是第一个了！');
+                    return;
+                }
+                ul.insertBefore(parent, parent.previousSibling)
+            }
+            function spanDown() {
+                var parent = this.parentNode;
+                if (unordered_list[list.length - 1] == parent) {
+                    alert('已经是最后一个了！');
+                    return;
+                }
+                ul.insertBefore(parent.previousSibling, parent)
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

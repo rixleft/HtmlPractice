@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 100px;
+        background: pink;
+      }
+
+      input {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="div1">
+      <input type="button" value="按钮" />
+    </div>
+    <script>
+      var btn = document.getElementsByTagName("input")[0];
+      var div = document.getElementsByTagName("div");
+      div[0].onclick = fn3;
+      bindEvent(btn, "contextmenu", fn1);
+      bindEvent(btn, "contextmenu", fn2);
+      bindEvent(btn, "click", fn1);
+      bindEvent(btn, "click", fn2);
+      // 给元素的同一个事件绑定多个事件处理函数
+      function bindEvent(obj, type, fn) {
+        if (window.addEventListener) {
+          obj.addEventListener(type, fn);
+        } else {
+          obj.attachEvent("on" + type, fn);
+        }
+      }
+
+      function fn1(ev) {
+        var ev = ev || event;
+        if (ev.preventDefault || ev.stopPropagation) {
+          ev.preventDefault();
+          ev.stopPropagation();
+        } else {
+          event.returnValue = false;
+          event.cancelBubble = true;
+        }
+        console.log("fn1");
+      }
+      function fn2(ev) {
+        var ev = ev || event;
+        if (ev.preventDefault) {
+          ev.preventDefault();
+        } else {
+          event.returnValue = false;
+        }
+        console.log("fn2");
+      }
+
+      function fn3(ev) {
+        console.log("fn3");
+      }
+
+      //   方法二
+      function bindEvent(obj, type, fn) {
+        if (window.addEventListener) {
+          obj.addEventListener(type, function (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            fn.call(obj, ev);
+          });
+        } else {
+          obj.attachEvent("on" + type, function (ev) {
+            event.returnValue = false;
+            event.cancelBubble = true;
+            fn.call(obj, ev);
+          });
+        }
+      }
+      function fn1(ev) {
+        console.log("fn1");
+      }
+      function fn2(ev) {
+        console.log("fn2");
+      }
+      function fn3(ev) {
+        console.log("fn3");
+      }
+    </script>
+  </body>
+</html>

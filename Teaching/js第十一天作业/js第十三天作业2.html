@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      article {
+        font-size: 18px;
+        line-height: 1.5;
+        font-family: "Kaiti";
+        text-indent: 2em;
+        background: rgba(224, 206, 206, 0.5);
+      }
+
+      p {
+        margin: 0 auto;
+        width: 400px;
+      }
+
+      div {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        font-size: 18px;
+        line-height: 1.5;
+        font-family: "Kaiti";
+        text-indent: 2em;
+        width: 400px;
+        display: none;
+        background: rgb(224, 153, 153);
+      }
+    </style>
+  </head>
+
+  <body>
+    <article>
+      <p>
+        斯蒂芬·库里，全名沃德尔·斯蒂芬·库里二世，1988年3月14日出生于美国俄亥俄州阿克伦，美国职业篮球运动员，司职<a
+          href="#"
+          >控球后卫</a
+        >，效力于<a href="#">NBA金州勇士队</a>。
+      </p>
+      <p>
+        斯蒂芬·库里于2009年通过选秀进入
+        NBA后一直效力于金州勇士队，新秀赛季入选最佳新秀第一阵容；2014-15、2016-17、2017-18赛季、2021-22赛季四次夺得<a
+          href="#"
+          >NBA总冠军</a
+        >，并于2021-22赛季当选总决赛MVP（FMVP）。
+      </p>
+      <p>
+        两次荣膺常规赛MVP；2015-16、2020-21赛季两次荣膺常规赛得分王；2021-22赛季荣膺西部决赛MVP；8次入选最佳阵容（4次一阵、3次二阵、1次三阵）。8次入选全明星首发阵容，2021年10月入选NBA75大巨星，12月成为NBA历史三分王，2022年荣膺全明星正赛MVP。
+      </p>
+    </article>
+    <div>
+      金州勇士队（Golden State
+      Warriors）于1946年成立并加盟BAA（1949年加盟NBA），是一支属于美国加利福尼亚州旧金山市的职业篮球队，是美国职业篮球联赛（NBA）西部联盟太平洋赛区的一部分。<a
+        href="#"
+        >详情</a
+      >
+    </div>
+    <div>
+      控球后卫（Point Guard）又称组织后卫，是篮球比赛阵容中的一个固定位置。<a
+        href="#"
+        >详情</a
+      >
+    </div>
+    <div>
+      NBA总冠军（The NBA
+      Championship）是由美国职业篮球联赛（NBA）主办，于每年6月举行，在NBA东部冠军和NBA西部冠军之间进行的系列比赛，获胜球队将获得NBA总冠军荣誉称号。每个赛季，通过常规赛决出的东部联盟和西部联盟前八名进入季后赛。季后赛为7场4胜制，对阵顺序为：第一对第八，第二对第七，第三对第六，第四对第五；之后由第一、第八之间的胜者与第四、第五之间的胜者对抗；第二、第七之间的胜者与第三、第六之间的胜者对抗。决出东部冠军和西部冠军后，会师总决赛争夺总冠军。<a
+        href="#"
+        >详情</a
+      >
+    </div>
+
+    <script>
+      var art = document.getElementsByTagName("article");
+      var a = art[0].getElementsByTagName("a");
+      var div = document.getElementsByTagName("div");
+      for (i = 0; i < a.length; i++) {
+        a[i].index = i;
+        a[i].onmouseenter = function (coord) {
+          var num = this.index;
+          console.log(num);
+          var x = coord.clientX;
+          var y = coord.clientY;
+          div[num].style.display = "block";
+          div[num].style.left = x + "px";
+          div[num].style.top = y + "px";
+        };
+        a[i].onmouseleave = function () {
+          var num = this.index;
+          console.log(num);
+          setTimeout(function () {
+            if (div[num]) {
+              div[num].onmouseenter = function () {
+                div[num].style.display = "block";
+              };
+              div[num].onmouseleave = function () {
+                div[num].style.display = "none";
+              };
+            } else {
+              div[num].style.display = "none";
+            }
+          }, 300);
+          div[num].style.display = "none";
+        };
+      }
+    </script>
+  </body>
+</html>
