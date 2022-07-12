@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #box {
+        width: 400px;
+        padding: 15px;
+        border: 5px solid #333;
+      }
+      .pop {
+        border: 1px solid skyblue;
+        width: 200px;
+        padding: 5px;
+        display: none;
+        position: absolute;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+      7月10日，红星新闻记者经多方联系，获知该视频由<a
+        href="###"
+        data-id="0"
+        class="keywords"
+        >四川</a
+      >眉山一位80后摄影爱好者余先生于7月6日19时40分时许，在眉山城区无意间拍摄到的。而车上的小女孩姓周，平时跟着妈妈在资阳生活。这次女孩放暑假了，她的父亲周师傅就带着妻子和女儿一起到<a
+        href="###"
+        data-id="1"
+        class="keywords"
+        >眉山</a
+      >装货，开车找路时，女儿在驾驶室跳舞被无意拍下。红星新闻记者联系上周师傅时，他还在滚滚热浪中，驾驶着贷款买下的货车往上海送货。说起女儿，他数次落泪，表示亏欠女儿。
+    </div>
+
+    <div class="pop"></div>
+
+    <script>
+      var data = [
+        "四川，简称川或蜀，是中国23个省之一，省会成都。位于中国西南地区内陆，地处长江上游，素有“天府之国”的美誉。为中国道教发源地之一，古蜀文明发祥地，全世界最早的纸币“交子”出现地。四川盐业文化，酒文化源远流长；三国文化，红军文化，巴人文化精彩纷呈。",
+        "眉山，古称眉州，四川省辖地级市，是千年大文豪苏东坡的故乡 [2]  ， [1]  是国家级天府新区的重要组成部分 [3]  ，素有“千载诗书城”“人文第一州”美誉 [4]  。面积7140平方公里 [5]  ，辖东坡区、彭山区和仁寿、洪雅、丹棱、青神四个县。 [5]  2021年，眉山市实现地区生产总值1547.87亿元， [61]  年末常住人口为295.9万。",
+      ];
+
+      var box = document.getElementById("box");
+      var aTags = box.getElementsByClassName("keywords");
+      var pop = document.getElementsByClassName("pop")[0];
+      var timeout = null;
+
+      for (var i = 0; i < aTags.length; i++) {
+        aTags[i].onmouseenter = function (ev) {
+          var ev = ev || event;
+          var left = ev.clientX;
+          var top = ev.clientY;
+
+          var id = this.getAttribute("data-id");
+
+          pop.innerHTML = data[id];
+          pop.style.left = left + "px";
+          pop.style.top = top + 10 + "px";
+          pop.style.display = "block";
+
+          clearTimeout(timeout);
+        };
+
+        // aTags[i].onmouseleave = function() {
+        //   pop.style.display = 'none';
+        // };
+
+        aTags[i].onmouseleave = hide;
+      }
+
+      function hide() {
+        timeout = setTimeout(function () {
+          pop.style.display = "none";
+        }, 800);
+      }
+
+      pop.onmouseenter = function () {
+        clearTimeout(timeout);
+      };
+
+      pop.onmouseleave = hide;
+    </script>
+  </body>
+</html>
