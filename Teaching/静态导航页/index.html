@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,24 +8,57 @@
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./all.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-</head>
+  </head>
 
-<body>
-
+  <body>
     <header class="w">
-        <section class="avater">
-            <div></div>
-            <div></div>
-        </section>
-        <article>22</article>
+      <section class="avater">
+        <div></div>
+        <span><p>天才:rixleft</p></span>
+      </section>
+      <article>
+        <p>今天要做什么呢？</p>
+        <div>保存</div>
+      </article>
     </header>
+    <form class="w" action="">
+      <input type="search" placeholder="搜索......" autofocus="autofocus" />
+    </form>
+    <nav>
+      <ul class="w">
+        <li>最近ToDo</li>
+        <li>前端学习</li>
+        <li>git知识</li>
+        <li>css布局</li>
+        <li>js实践</li>
+        <li>网站导航</li>
+        <li>题库</li>
+        <li>文章</li>
+      </ul>
+      <footer>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </footer>
+    </nav>
     <script src="./jquery-1.12.4.js"></script>
     <!-- 实现导航点击下拉和收回 -->
     <script>
-        $('#nav_Id:eq(0)').click(function () {
-            $('#sec_Id:eq(0)').slideToggle(400);
+      //这里有问题
+      var $li = $("li", $("nav ul"));
+      console.log($li[1]);
+      var $div = $("div", $("footer", $("nav")));
+      for (i = 0; i < $li.length; i++) {
+        $li.click(function () {
+          console.log($div[i]);
+          $div[i].slideToggle().css({ class: "w", height: "400px" }, 1100);
         });
+      }
     </script>
-</body>
-
+  </body>
 </html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>通过innerHTML方法向页面元素中输出内容</title>
+  </head>
+  <script>
+    function changeContent() {
+      document.getElementById("demo").innerHTML =
+        "通过innerHTML方法向页面输出了内容";
+    }
+  </script>
+  <body>
+    <h1 id="demo">我是一个标题</h1>
+    <button type="button" onclick="changeContent()">更改内容</button>
+  </body>
+</html>

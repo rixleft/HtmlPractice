@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/x-icon;base64,=" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        left: 200px;
+        top: 150px;
+      }
+      .box {
+        width: 500px;
+        height: 400px;
+        border: 10px solid #333;
+        margin: 100px;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div id="div1"></div>
+    </div>
+
+    <script>
+      var div1 = document.getElementById("div1");
+
+      div1.onmousedown = function (ev) {
+        var ev = ev || event;
+        //获取鼠标在元素内部的偏移值（offset），加上该元素的边框宽度 -- clientLeft(左边框宽度)，clientTop(上边框宽度)。
+        var offsetX = ev.offsetX + this.clientLeft;
+        var offsetY = ev.offsetY + this.clientTop;
+
+        // 获取定位父级的外边框到文档边缘之间的距离
+        var pos = getPos(this.offsetParent);
+        // 获取定位父级的边框宽度
+        pos.left += this.offsetParent.clientLeft;
+        pos.top += this.offsetParent.clientTop;
+
+        document.onmousemove = function (ev) {
+          var ev = ev || event;
+          var docEle = document.documentElement,
+            body = document.body;
+          // 获取滚动宽度
+          var scrollX =
+            window.pageXOffset || docEle.scrollLeft || body.scrollLeft;
+          // 获取滚动高度
+          var scrollY =
+            window.pageYOffset || docEle.scrollLeft || body.scrollTop;
+          // 计算拖拽元素的 left 值
+          var left = ev.clientX + scrollX - pos.left - offsetX;
+          // 计算拖拽元素的 top 值
+          var top = ev.clientY + scrollY - pos.top - offsetY;
+          // 计算拖拽元素最大可以拖拽的移动宽度
+          var iWidth = div1.offsetParent.clientWidth - div1.offsetWidth;
+          // 计算拖拽元素最大可以拖拽的移动高度
+          var iHeight = div1.offsetParent.clientHeight - div1.offsetHeight;
+
+          // 限制拖拽的允许范围
+          if (left < 0) {
+            left = 0;
+          }
+          if (top < 0) {
+            top = 0;
+          }
+
+          if (left > iWidth) {
+            left = iWidth;
+          }
+
+          if (top > iHeight) {
+            top = iHeight;
+          }
+
+          div1.style.left = left + "px";
+          div1.style.top = top + "px";
+        };
+
+        document.onmouseup = function () {
+          document.onmousemove = null;
+          document.onmouseup = null;
+        };
+      };
+
+      function getPos(obj) {
+        //将元素的父级定位属性值重置。
+        var pos = { top: 0, left: 0 };
+        //判断是否有父级，判断节点类型是否为元素节点。
+        if (!obj || obj.nodeType !== 1) return null;
+        //元素的最近的一个有定位属性的祖先元素存在时
+        while (obj.offsetParent) {
+          //元素的外边框到定位父级的内边框之间的距离。offsetLeft,offsetTop
+          pos.left += obj.offsetLeft;
+          pos.top += obj.offsetTop;
+
+          obj = obj.offsetParent;
+          pos.left += obj.clientLeft;
+          pos.top += obj.clientTop;
+        }
+        return pos;
+      }
+    </script>
+  </body>
+</html>

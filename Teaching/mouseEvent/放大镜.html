@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/x-icon;base64,=" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      #div1 {
+        width: 200px;
+        height: 200px;
+        background: red;
+        position: absolute;
+        left: 200px;
+        top: 150px;
+        opacity: 0.5;
+        display: none;
+      }
+      .box {
+        width: 450px;
+        height: 450px;
+        border: 10px solid #333;
+        margin: 100px;
+        position: relative;
+        background-image: url(./thumb.jpg.avif);
+      }
+      .zoom {
+        width: 550px;
+        height: 550px;
+        border: 1px solid #ccc;
+        position: absolute;
+        display: none;
+        background-image: url(./big.jpg.avif);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div id="div1"></div>
+    </div>
+    <div class="zoom"></div>
+
+    <script>
+      var div1 = document.getElementById("div1");
+      var box = document.getElementsByClassName("box")[0];
+      var zoom = document.getElementsByClassName("zoom")[0];
+      var imgSize = {
+        width: 800,
+        height: 800,
+      };
+
+      box.onmouseenter = function (ev) {
+        var ev = ev || event;
+
+        div1.style.display = "block";
+        div1.style.cursor = "move";
+
+        var disX = ev.clientX;
+        var disY = ev.clientY;
+
+        var pos = getPos(div1.offsetParent);
+        pos.left += div1.offsetParent.clientLeft;
+        pos.top += div1.offsetParent.clientTop;
+
+        // 初始化并显示大框架的位置
+        zoom.style.left = box.offsetLeft + box.offsetWidth + "px";
+        zoom.style.top = box.offsetTop + "px";
+        zoom.style.display = "block";
+
+        box.onmousemove = function (ev) {
+          var ev = ev || event;
+          // 浮动小方块的坐标
+          var left = ev.clientX - pos.left - div1.offsetWidth / 2;
+          var top = ev.clientY - pos.left - div1.offsetHeight / 2;
+          // 浮动小方块可以活动的最大范围
+          var iWidth = div1.offsetParent.clientWidth - div1.offsetWidth;
+          var iHeight = div1.offsetParent.clientHeight - div1.offsetHeight;
+
+          if (left < 0) {
+            left = 0;
+          }
+          if (top < 0) {
+            top = 0;
+          }
+
+          if (left > iWidth) {
+            left = iWidth;
+          }
+          if (top > iHeight) {
+            top = iHeight;
+          }
+
+          div1.style.left = left + "px";
+          div1.style.top = top + "px";
+
+          // 大图可以活动的范围
+          var iW = imgSize.width - zoom.clientWidth;
+          var iH = imgSize.height - zoom.clientHeight;
+
+          // 小方块活动范围 与  大图活动范围的比例关系
+          // 横向 （小方块当前的 left / 最大活动范围 iWidth == 大图当前的背景位置x / 大图的活动范围 iW ）
+          // 纵向同理
+          var scaleX = iWidth / iW;
+          var scaleY = iHeight / iH;
+
+          // 使用比例关系来计算大图的背景定位位置
+          zoom.style.backgroundPositionX = -left * scaleX + "px";
+          zoom.style.backgroundPositionY = -top * scaleY + "px";
+        };
+
+        box.onmouseleave = function () {
+          div1.style.display = "none";
+          zoom.style.display = "none";
+          document.onmousemove = null;
+          box.onmouseleave = null;
+        };
+      };
+
+      function getPos(obj) {
+        var pos = { top: 0, left: 0 };
+
+        if (!obj || obj.nodeType !== 1) return null;
+
+        while (obj.offsetParent) {
+          pos.left += obj.offsetLeft;
+          pos.top += obj.offsetTop;
+
+          obj = obj.offsetParent;
+          pos.left += obj.clientLeft;
+          pos.top += obj.clientTop;
+        }
+        return pos;
+      }
+    </script>
+  </body>
+</html>

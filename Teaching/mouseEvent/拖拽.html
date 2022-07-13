@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        left: 100px;
+        top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1"></div>
+    <script>
+      var div = document.getElementById("div");
+      div1.onmousedown = function (ev) {
+        var offsetX = ev.offsetX;
+        var offsetY = ev.offsetY;
+        console.log(ev); //参数（ev）是鼠标事件MouseEvent{}
+        document.onmousemove = function (ev) {
+          var left = ev.clientX - offsetX;
+          var top = ev.clientY - offsetY;
+          div1.style.left = left + "px";
+          div1.style.top = top + "px";
+        };
+        document.onmouseup = function () {
+          document.onmousemove = null;
+          document.onmouseup = null;
+        };
+      };
+    </script>
+  </body>
+</html>

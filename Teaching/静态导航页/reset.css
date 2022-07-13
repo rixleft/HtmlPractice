@@ -8,12 +8,15 @@
 html,
 body {
   height: 100%;
+  font-size: 18px;
+  font-family: 'KaiTi';
+  background: url(./1.jpg) no-repeat;
+  background-size: cover;
 }
 
 .w {
   width: 1200px;
   margin: 0 auto;
-  background: #999;
 }
 
 li {

@@ -1,5 +1,142 @@
 header {
-  height: 200px;
+  height: 250px;
   display: flex;
+}
 
+section {
+  margin-top: 50px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  position: relative;
+}
+
+section div {
+  width: 250px;
+  height: 250px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 10px solid rgba(255, 255, 255, .3);
+  background: url(./avater.jpg) no-repeat -35px 0px;
+  background-size: cover;
+  background-clip: border-box;
+  background-origin: border-box;
+  position: absolute;
+  left: 0px;
+  transform: scale(1);
+  transition: 0.25s transform, 0.25s 0.25s left, 0.25s 0.25s opacity;
+  opacity: 1;
+}
+
+section span {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 10px solid rgba(255, 255, 255, .3);
+  background: url(./2.png) no-repeat -155px 0px;
+  background-size: cover;
+  background-clip: border-box;
+  background-origin: border-box;
+  position: absolute;
+  left: 250px;
+  top: 0;
+  transform: scale(0.5);
+  transition: 0.25s 0.25s left, 0.25s 0.5s transform, 0.25s 0.25s opacity;
+  opacity: 0;
+  pointer-events: none;
+}
+
+section span p {
+  width: 120px;
+  position: absolute;
+  left: calc(50% - 60px);
+  bottom: 20px;
+}
+
+section:hover div {
+  transform: scale(0.5);
+  left: -250px;
+  opacity: 0;
+}
+
+section:hover span {
+  left: 0;
+  transform: scale(1);
+  opacity: 1;
+}
+
+header article {
+  flex: 1;
+  display: flex;
+  position: relative;
+  font-size: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+header article div {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  line-height: 50px;
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  background: rgba(27, 4, 155, .3);
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+form input {
+  text-indent: 2em;
+  width: 500px;
+  height: 50px;
+}
+
+form input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  position: relative;
+  right: 15px;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: url("1.jpg") no-repeat center;
+  background-size: 100% 100%;
+  color: rgba(0, 0, 0, 0);
+}
+
+form input[type=search]::-ms-clear {
+  appearance: none;
+  position: relative;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: url("1.jpg") no-repeat center;
+  background-size: 100% 100%;
+  color: rgba(0, 0, 0, 0);
+}
+
+nav ul {
+  background: #999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul li {
+
+  font-size: 24px;
+}
+
+nav footer {}
+
+nav footer div {
+  background: red;
 }

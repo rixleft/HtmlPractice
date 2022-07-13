@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/x-ico;base64,=" />
+    <title>Document</title>
+    <style>
+      #piano {
+        margin: 50px auto 0;
+      }
+      #piano li {
+        width: 50px;
+        height: 300px;
+        border: 1px solid #333;
+        float: left;
+        list-style: none;
+      }
+      #piano li.active {
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <audio src="./1.mp3" autoplay controls></audio>
+
+    <ul id="piano">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+    </ul>
+
+    <script>
+      var keys = document.querySelectorAll("#piano li");
+      var music = document.querySelector("audio");
+      document.onkeydown = function (ev) {
+        if (ev.key > 0 && ev.key < 8) {
+          music.src = "./" + ev.key + ".mp3";
+          keys[ev.key - 1].className = "active";
+        } else {
+          music.src = "./8.mp3";
+        }
+      };
+
+      document.onkeyup = function (ev) {
+        if (keys[ev.key - 1]) {
+          keys[ev.key - 1].className = "";
+        } else {
+          music.src = "./8.mp3";
+        }
+      };
+    </script>
+  </body>
+</html>

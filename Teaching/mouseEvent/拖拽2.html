@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #box {
+        width: 450px;
+        height: 450px;
+        background: url(./thumb.jpg.avif) no-repeat;
+        border: 5px solid #333;
+        position: relative;
+        margin: 50px;
+      }
+      #mask {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #333;
+        opacity: 0.8;
+      }
+      #div1 {
+        width: 150px;
+        height: 150px;
+        background: red;
+        position: absolute;
+        background: url(./thumb.jpg.avif) no-repeat;
+        background-attachment: fixed;
+        background-color: pink;
+      }
+      #dot {
+        width: 10px;
+        height: 10px;
+        background: red;
+        position: absolute;
+        bottom: -6px;
+        right: -6px;
+        border-radius: 50%;
+        /* opacity: 0; */
+        cursor: nw-resize;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+      <div id="mask"></div>
+      <div id="div1">
+        <div id="dot"></div>
+      </div>
+    </div>
+
+    <script>
+      // clipImage(document.getElementById('box'), 'images/thumb.jpg.avif', 450, 450)
+
+      // 封装，让函数可以重复使用。
+      clipImage(document.getElementById("box"), "./thumb.jpg.avif", 450, 450);
+      clipImage(document.getElementById("box"), "./thumb.jpg.avif", 450, 450);
+
+      function clipImage() {
+        var div1 = document.getElementById("div1");
+        var dot = document.getElementById("dot");
+        var parent = div1.offsetParent;
+        var pos = getPos(parent);
+        div1.style.backgroundPositionX = pos.left + parent.clientLeft + "px";
+        div1.style.backgroundPositionY = pos.top + parent.clientTop + "px";
+
+        dot.onmousedown = function (ev) {
+          var clientX = ev.clientX;
+          var clientY = ev.clientY;
+          var originWidth = div1.offsetWidth;
+          var originHeight = div1.offsetHeight;
+          var left = div1.offsetLeft;
+          var top = div1.offsetTop;
+
+          ev.preventDefault();
+
+          document.onmousemove = function (ev) {
+            var x = ev.clientX - clientX;
+            var y = ev.clientY - clientY;
+
+            var width = originWidth + x;
+            var height = originHeight + y;
+            // console.log(x, y);
+
+            /* if (width < 20) {
+            width = 20;
+          }
+
+          if (width > parent.clientWidth - left) {
+            width = parent.clientWidth - left;
+          } */
+
+            if (width < 20 || width > parent.clientWidth - left) {
+              width = width < 20 ? 20 : parent.clientWidth - left;
+            }
+
+            // if (height < 20 ) {
+            //   height = 20;
+            // }
+
+            // if (height > parent.clientHeight - top) {
+            //   height = parent.clientHeight - top;
+            // }
+
+            if (height < 20 || height > parent.clientHeight - top) {
+              height = height < 20 ? 20 : parent.clientHeight - top;
+            }
+
+            div1.style.width = width + "px";
+            div1.style.height = height + "px";
+          };
+
+          document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+
+          ev.stopPropagation();
+        };
+
+        div1.onmousedown = function (ev) {
+          var offsetX = ev.clientX;
+          var offsetY = ev.clientY;
+          var oldL = div1.offsetLeft;
+          var oldT = div1.offsetTop;
+
+          ev.preventDefault();
+
+          document.onmousemove = function (ev) {
+            var left = ev.clientX - offsetX + oldL;
+            var top = ev.clientY - offsetY + oldT;
+
+            if (left < 0) {
+              left = 0;
+            }
+
+            if (left > parent.clientWidth - div1.offsetWidth) {
+              left = parent.clientWidth - div1.offsetWidth;
+            }
+
+            if (top < 0) {
+              top = 0;
+            }
+
+            if (top > parent.clientHeight - div1.offsetHeight) {
+              top = parent.clientHeight - div1.offsetHeight;
+            }
+
+            div1.style.left = left + "px";
+            div1.style.top = top + "px";
+          };
+
+          document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        };
+      }
+
+      function getPos(obj) {
+        var pos = { top: 0, left: 0 };
+
+        while (obj && obj.offsetParent) {
+          pos.left += obj.offsetLeft;
+          pos.top += obj.offsetTop;
+
+          obj = obj.offsetParent;
+          pos.left += obj.clientLeft;
+          pos.top += obj.clientTop;
+        }
+
+        return pos;
+      }
+
+      // 获取页面的滚动宽度
+      function scrollX() {
+        var docEle = document.documentElement,
+          body = document.body;
+        return window.pageXOffset || docEle.scrollLeft || body.scrollLeft;
+      }
+
+      // 获取页面的滚动高度
+      function scrollY() {
+        var docEle = document.documentElement,
+          body = document.body;
+        return window.pageYOffset || docEle.scrollTop || body.scrollTop;
+      }
+    </script>
+  </body>
+</html>
