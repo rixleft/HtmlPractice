@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 3000px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="box"></div>
+    <div id="box2"></div>
+
+    <script>
+      new ImageClip(
+        document.getElementById("box"),
+        "./thumb.jpg.avif",
+        450,
+        450
+      );
+
+      new ImageClip(
+        document.getElementById("box2"),
+        "./big.jpg.avif",
+        800,
+        800
+      );
+
+      /* 
+    
+      将普通函数改写成构造函数：
+        1，将内部所有的变量，都写成 this 的一个属性
+        2，将内部所有的函数，都写成 this 的一个方法
+    
+    */
+
+      function ImageClip(parent, src, width, height) {
+        this.drag = document.createElement("div");
+        this.dot = document.createElement("div");
+        this.mask = document.createElement("div");
+
+        // 设置元素的样式
+        css(this.drag, {
+          width: "150px",
+          height: "150px",
+          position: "absolute",
+          backgroundColor: "pink",
+          backgroundAttachment: "fixed",
+          backgroundImage: "url(" + src + ")",
+        });
+
+        css(parent, {
+          width: width + "px",
+          height: height + "px",
+          position: "relative",
+          background: "url(" + src + ") no-repeat",
+        });
+
+        css(this.dot, {
+          width: "10px",
+          height: "10px",
+          right: "-6px",
+          bottom: "-6px",
+          position: "absolute",
+          backgroundColor: "red",
+          cursor: "nw-resize",
+          borderRadius: "50%",
+        });
+
+        css(this.mask, {
+          width: "100%",
+          height: "100%",
+          opacity: ".8",
+          position: "absolute",
+          backgroundColor: "#333",
+        });
+
+        // 将创建元素添加到页面中
+        this.drag.appendChild(this.dot);
+        parent.appendChild(this.mask);
+        parent.appendChild(this.drag);
+
+        this.pos = getPos(parent);
+        this.drag.style.backgroundPositionX =
+          this.pos.left + parent.clientLeft - scrollX() + "px";
+        this.drag.style.backgroundPositionY =
+          this.pos.top + parent.clientTop - scrollY() + "px";
+        var _that = this;
+        window.addEventListener("scroll", function () {
+          _that.drag.style.backgroundPositionX =
+            _that.pos.left + parent.clientLeft - scrollX() + "px";
+          _that.drag.style.backgroundPositionY =
+            _that.pos.top + parent.clientTop - scrollY() + "px";
+        });
+        _that.dot.onmousedown = function (ev) {
+          var clientX = ev.clientX;
+          var clientY = ev.clientY;
+          var originWidth = _that.drag.offsetWidth;
+          var originHeight = _that.drag.offsetHeight;
+          var left = _that.drag.offsetLeft;
+          var top = _that.drag.offsetTop;
+
+          ev.preventDefault();
+
+          document.onmousemove = function (ev) {
+            var x = ev.clientX - clientX;
+            var y = ev.clientY - clientY;
+
+            var width = originWidth + x;
+            var height = originHeight + y;
+
+            if (width < 20 || width > parent.clientWidth - left) {
+              width = width < 20 ? 20 : parent.clientWidth - left;
+            }
+
+            if (height < 20 || height > parent.clientHeight - top) {
+              height = height < 20 ? 20 : parent.clientHeight - top;
+            }
+
+            _that.drag.style.width = width + "px";
+            _that.drag.style.height = height + "px";
+          };
+
+          document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+
+          ev.stopPropagation();
+        };
+
+        _that.drag.onmousedown = function (ev) {
+          var offsetX = ev.clientX;
+          var offsetY = ev.clientY;
+          var oldL = _that.drag.offsetLeft;
+          var oldT = _that.drag.offsetTop;
+
+          ev.preventDefault();
+
+          document.onmousemove = function (ev) {
+            var left = ev.clientX - offsetX + oldL;
+            var top = ev.clientY - offsetY + oldT;
+
+            if (left < 0) {
+              left = 0;
+            }
+
+            if (left > parent.clientWidth - _that.drag.offsetWidth) {
+              left = parent.clientWidth - _that.drag.offsetWidth;
+            }
+
+            if (top < 0) {
+              top = 0;
+            }
+
+            if (top > parent.clientHeight - _that.drag.offsetHeight) {
+              top = parent.clientHeight - _that.drag.offsetHeight;
+            }
+
+            _that.drag.style.left = left + "px";
+            _that.drag.style.top = top + "px";
+          };
+
+          document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        };
+      }
+
+      function getPos(obj) {
+        var pos = { top: 0, left: 0 };
+        while (obj && obj.offsetParent) {
+          pos.left += obj.offsetLeft;
+          pos.top += obj.offsetTop;
+          obj = obj.offsetParent;
+          pos.left += obj.clientLeft;
+          pos.top += obj.clientTop;
+        }
+        return pos;
+      }
+      // 获取页面的滚动宽度
+      function scrollX() {
+        var docEle = document.documentElement,
+          body = document.body;
+        return window.pageXOffset || docEle.scrollLeft || body.scrollLeft;
+      }
+      // 获取页面的滚动高度
+      function scrollY() {
+        var docEle = document.documentElement,
+          body = document.body;
+        return window.pageYOffset || docEle.scrollTop || body.scrollTop;
+      }
+
+      // 设置样式
+      function css(obj, styles, value) {
+        if (typeof styles === "object") {
+          for (var attr in styles) {
+            obj.style[attr] = styles[attr];
+          }
+        } else {
+          obj.style[styles] = value;
+        }
+      }
+    </script>
+  </body>
+</html>

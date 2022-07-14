@@ -25,7 +25,7 @@ section div {
   left: 0px;
   transform: scale(1);
   transition: 0.25s transform, 0.25s 0.25s left, 0.25s 0.25s opacity;
-  opacity: 1;
+  opacity: 0.5;
 }
 
 section span {
@@ -63,7 +63,7 @@ section:hover div {
 section:hover span {
   left: 0;
   transform: scale(1);
-  opacity: 1;
+  opacity: 0.5;
 }
 
 header article {
@@ -75,16 +75,45 @@ header article {
   justify-content: center;
 }
 
-header article div {
+header article>div {
   position: absolute;
   bottom: 0;
   right: 0;
-  text-align: center;
-  line-height: 50px;
   width: 100px;
   height: 50px;
-  border-radius: 20px;
-  background: rgba(27, 4, 155, .3);
+  padding: 15px 25px;
+  border: unset;
+  border-radius: 15px;
+  z-index: 1;
+  background: transparent;
+  text-align: center;
+  font-weight: 1000;
+  font-size: 24px;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.71);
+  transition: all 250ms;
+  overflow: hidden;
+}
+
+header article>div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 15px;
+  background-image: -webkit-linear-gradient(right, #30077ae4, #0fa4ef);
+  z-index: -1;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.71);
+  transition: all 250ms
+}
+
+header article>div:hover {
+  color: #e8e8e8;
+}
+
+header article>div:hover::before {
+  width: 100%;
 }
 
 form {
@@ -98,6 +127,31 @@ form input {
   text-indent: 2em;
   width: 500px;
   height: 50px;
+  line-height: 28px;
+  border: 2px solid transparent;
+  border-bottom-color: #777;
+  padding: .2rem 0;
+  outline: none;
+  background-color: transparent;
+  color: #0d0c22;
+  transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+form input:focus,
+input:hover {
+  outline: none;
+  padding: .2rem 1rem;
+  border-radius: 1rem;
+  border-color: #7a9cc6;
+}
+
+form input::placeholder {
+  color: #777;
+}
+
+form input:focus::placeholder {
+  opacity: 0;
+  transition: opacity .3s;
 }
 
 form input::-webkit-search-cancel-button {
@@ -124,15 +178,56 @@ form input[type=search]::-ms-clear {
 }
 
 nav ul {
-  background: #999;
+  /* background: #999; */
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 nav ul li {
+  position: relative;
+  font-size: 17px;
+  text-transform: uppercase;
+  padding: 1em 2.5em;
+  display: inline-block;
+  border-radius: 6em;
+  transition: all .2s;
+  border: none;
+  font-weight: 500;
+  color: black;
+  /* background-color: rgba(53, 30, 227, 0.404); */
+}
 
-  font-size: 24px;
+nav ul li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+nav ul li:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav ul li::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all .4s;
+}
+
+nav ul li::after {
+  background-color: rgba(74, 64, 152, 0.404);
+}
+
+nav ul li:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
 }
 
 nav footer {}
