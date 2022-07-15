@@ -1,64 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>首页</title>
-    <link rel="stylesheet" href="./reset.css" />
-    <link rel="stylesheet" href="./all.css" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-  </head>
 
-  <body>
-    <header class="w">
-      <section class="avater">
-        <div></div>
-        <span><p>天才:rixleft</p></span>
-      </section>
-      <article>
-        <p>今天要做什么呢？</p>
-        <div>保存</div>
-      </article>
-    </header>
-    <form class="w" action="">
-      <input type="search" placeholder="搜索......" autofocus="autofocus" />
-    </form>
-    <nav>
-      <ul class="w">
-        <li>最近ToDo</li>
-        <li>前端学习</li>
-        <li>git知识</li>
-        <li>css布局</li>
-        <li>js实践</li>
-        <li>网站导航</li>
-        <li>题库</li>
-        <li>文章</li>
-      </ul>
-      <footer>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </footer>
-    </nav>
-    <script src="./jquery-1.12.4.js"></script>
-    <!-- 实现导航点击下拉和收回 -->
-    <script>
-      //这里有问题
-      var $li = $("li", $("nav ul"));
-      console.log($li[1]);
-      var $div = $("div", $("footer", $("nav")));
-      for (i = 0; i < $li.length; i++) {
-        $li.click(function () {
-          console.log($div[i]);
-          $div[i].slideToggle().css({ class: "w", height: "400px" }, 1100);
-        });
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>首页</title>
+  <link rel="stylesheet" href="./reset.css" />
+  <link rel="stylesheet" href="./all.css" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+  <div class="bgImg"></div>
+  <header class="w">
+    <section class="avater">
+      <div></div>
+      <span>
+        <p>天才:rixleft</p>
+      </span>
+    </section>
+    <article>
+      <picture>
+        <img src="./1.jpg" />
+        <img src="./2.jpg" />
+        <img src="./3.jpg" />
+        <img src="./4.jpg" />
+        <img src="./5.jpg" />
+        <img src="./6.jpg" />
+        <img src="./7.jpg" />
+        <img src="./8.jpg" />
+        <img src="./9.jpg" />
+      </picture>
+      <p>今天要做什么呢？</p>
+      <div>保存</div>
+    </article>
+  </header>
+  <form class="w" action="">
+    <input type="search" placeholder="搜索......" autofocus="autofocus" />
+  </form>
+  <nav>
+    <ul class="w">
+      <li>最近在看</li>
+      <li>前端学习</li>
+      <li>git知识</li>
+      <li>css布局</li>
+      <li>js实践</li>
+      <li>网站导航</li>
+      <li>题库</li>
+      <li>文章</li>
+    </ul>
+    <footer>
+      <div><a href="https://weread.qq.com/">微信读书</a></div>
+      <div><a href="https://developer.mozilla.org/zh-CN/">MDN文档</a></div>
+      <div><a href="https://github.com/">github官网</a></div>
+      <div><a href="https://uiverse.io/">组件工具箱</a></div>
+      <div><a href="https://docs.microsoft.com/zh-cn/windows/wsl/about">WSL文档</a></div>
+      <div><a href="http://www.cxy521.com/">程序员导航</a></div>
+      <div><a href="https://leetcode.cn/problemset/all/">力扣题库</a></div>
+      <div><a href="https://www.ruanyifeng.com/blog/">阮一峰个人网站</a></div>
+    </footer>
+  </nav>
+  <!-- <script src="./jquery-1.12.4.js"></script> -->
+  <script>
+    // 实现点击图片时切换背景图片
+    var pictures = document.querySelector("picture").getElementsByTagName("img");
+    var bgImg = document.querySelector('.bgImg');
+    for (i = 0; i < pictures.length; i++) {
+      pictures[i].onclick = function () {
+        bgImg.style.backgroundImage = "url(" + this.src + ")";
+        // document.body.style.backgroundSize = "cover";
+      };
+    }
+    var list = document.querySelectorAll("nav ul li");
+    var link = document.querySelectorAll('nav footer div a')
+    var active = document.querySelectorAll("footer div");
+    console.log(link);
+
+    for (j = 0; j < list.length; j++) {
+      list[j].index = j;
+      list[j].onclick = function () {
+        for (z = 0; z < list.length; z++) {
+          active[z].className = "";
+          active[z].style.display = 'none';
+          active[z].style.transition = 'none';
+          active[z].style.height = '20px';
+
+        }
+        active[this.index].className = 'w active';
+        active[this.index].style.display = 'block';
+        active[this.index].style.transition = 'all 1s';
+        active[this.index].style.height = '300px';
+        // active[this.index].animate([{ height: '0px' }, { height: '300px' }], { duration: 1000, "fil" })
       }
-    </script>
-  </body>
+
+    }
+
+  </script>
+</body>
+
 </html>

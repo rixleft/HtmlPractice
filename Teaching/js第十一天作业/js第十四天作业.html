@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //倒计时
+        function midAutumn(time) {
+            var currentTime = new Date();
+            var mid_autumn = new Date(time);
+            var times = mid_autumn - currentTime;
+            console.log(times);
+            var days = Math.floor(times / (1000 * 60 * 60 * 24));
+            days = days < 10 ? "0" + days : days;
+            var hours = Math.floor((times - days * 1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+            hours = hours < 10 ? '0' + hours : hours;
+            var minutes = Math.floor((times - days * 1000 * 60 * 60 * 24 - hours * 1000 * 60 * 60) / (1000 * 60));
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var seconds = Math.floor((times - days * 1000 * 60 * 60 * 24 - hours * 1000 * 60 * 60 - minutes * 1000 * 60) / 1000);
+            seconds = seconds < 0 ? '0' + seconds : seconds;
+            return '距离中秋节还有' + days + '天' + hours + '小时' + minutes + '分' + seconds + '秒';
+        }
+        console.log(midAutumn('2022-9-10'));
+
+
+        //倒计时
+        function countDown(time) {
+            var currentTime = new Date();
+            var inputTime = new Date(time);
+            var times = (inputTime - currentTime) / 1000;
+            var days = parseInt(times / 60 / 60 / 24);
+            days = days < 10 ? "0" + days : days;
+            var hours = parseInt(times / 60 / 60 % 24);
+            hours = hours < 10 ? '0' + hours : hours;
+            var minutes = parseInt(times / 60 % 60);
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var seconds = parseInt(times % 60);
+            seconds = seconds < 0 ? '0' + seconds : seconds;
+            return '距离这一天还有' + days + '天' + hours + '小时' + minutes + '分' + seconds + '秒';
+
+        }
+        console.log(countDown('2022-9-10 00:00:00'));
+    </script>
+</body>
+
+</html>
