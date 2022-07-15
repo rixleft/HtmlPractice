@@ -201,16 +201,14 @@ form input[type=search]::-ms-clear {
   color: rgba(0, 0, 0, 0);
 }
 
-nav ul {
-  /* background: #999; */
+nav>ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-nav ul li {
+nav>ul>li>a {
   position: relative;
-  font-size: 17px;
   text-transform: uppercase;
   padding: 1em 2.5em;
   display: inline-block;
@@ -220,20 +218,19 @@ nav ul li {
   font-weight: 500;
   color: black;
   cursor: pointer;
-  /* background-color: rgba(53, 30, 227, 0.404); */
 }
 
-nav ul li:hover {
+nav>ul>li>a:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-nav ul li:active {
+nav>ul>li>a:active {
   transform: translateY(-1px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-nav ul li::after {
+nav>ul>li>a::after {
   content: "";
   display: inline-block;
   height: 100%;
@@ -244,25 +241,16 @@ nav ul li::after {
   left: 0;
   z-index: -1;
   transition: all .4s;
-}
-
-nav ul li::after {
   background-color: rgba(74, 64, 152, 0.404);
 }
 
-nav ul li:hover::after {
+nav>ul>li>a:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
 }
 
-footer div {
-  height: 20px;
-  transition: all 1s;
-}
-
-.active {
-  display: block;
-  /* height: 300px; */
-  background: rgba(99, 91, 207, 1);
-  animation-fill-mode: forwards;
+nav ul li div {
+  display: none;
+  text-align: center;
+  /* margin-top: 10px; */
 }

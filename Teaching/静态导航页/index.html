@@ -12,7 +12,6 @@
 </head>
 
 <body>
-  <div class="bgImg"></div>
   <header class="w">
     <section class="avater">
       <div></div>
@@ -22,6 +21,7 @@
     </section>
     <article>
       <picture>
+        <img src="./0.jpg" />
         <img src="./1.jpg" />
         <img src="./2.jpg" />
         <img src="./3.jpg" />
@@ -30,10 +30,9 @@
         <img src="./6.jpg" />
         <img src="./7.jpg" />
         <img src="./8.jpg" />
-        <img src="./9.jpg" />
       </picture>
-      <p>今天要做什么呢？</p>
-      <div>保存</div>
+      <p contenteditable="true">今天要做什么呢？</p>
+      <div href="" download="noname.txt">保存</div>
     </article>
   </header>
   <form class="w" action="">
@@ -41,60 +40,114 @@
   </form>
   <nav>
     <ul class="w">
-      <li>最近在看</li>
-      <li>前端学习</li>
-      <li>git知识</li>
-      <li>css布局</li>
-      <li>js实践</li>
-      <li>网站导航</li>
-      <li>题库</li>
-      <li>文章</li>
+      <li>
+        <a href="###">最近在看</a>
+        <div>
+          <a href="https://weread.qq.com/">微信读书</a>
+        </div>
+      </li>
+      <li>
+        <a href="###">前端学习</a>
+        <div>
+          <a href="https://developer.mozilla.org/zh-CN/">MDN文档</a>
+        </div>
+      </li>
+      <li>
+        <a href="###">git知识</a>
+        <div>
+          <a href="https://github.com/">github</a>
+        </div>
+      </li>
+      <li><a href="###">css布局</a>
+        <div>
+          <a href="https://uiverse.io/">组件工具箱</a>
+        </div>
+      </li>
+      <li><a href="###">js实践</a>
+        <div>
+          <a href="https://docs.microsoft.com/zh-cn/windows/wsl/about">WSL文档</a>
+        </div>
+      </li>
+      <li><a href="###">网站导航</a>
+        <div>
+          <a href="http://www.cxy521.com/">程序员导航</a>
+        </div>
+      </li>
+      <li><a href="###">题库</a>
+        <div>
+          <a href="https://leetcode.cn/problemset/all/">力扣题库</a>
+        </div>
+      </li>
+      <li><a href="###">文章</a>
+        <div>
+          <a href="https://www.ruanyifeng.com/blog/">阮一峰</a>
+        </div>
+      </li>
     </ul>
-    <footer>
-      <div><a href="https://weread.qq.com/">微信读书</a></div>
-      <div><a href="https://developer.mozilla.org/zh-CN/">MDN文档</a></div>
-      <div><a href="https://github.com/">github官网</a></div>
-      <div><a href="https://uiverse.io/">组件工具箱</a></div>
-      <div><a href="https://docs.microsoft.com/zh-cn/windows/wsl/about">WSL文档</a></div>
-      <div><a href="http://www.cxy521.com/">程序员导航</a></div>
-      <div><a href="https://leetcode.cn/problemset/all/">力扣题库</a></div>
-      <div><a href="https://www.ruanyifeng.com/blog/">阮一峰个人网站</a></div>
-    </footer>
   </nav>
   <!-- <script src="./jquery-1.12.4.js"></script> -->
   <script>
     // 实现点击图片时切换背景图片
-    var pictures = document.querySelector("picture").getElementsByTagName("img");
-    var bgImg = document.querySelector('.bgImg');
-    for (i = 0; i < pictures.length; i++) {
+    var pictures = document.getElementsByTagName("img");
+    var body = document.getElementsByTagName("body");
+    for (var i = 0; i < pictures.length; i++) {
+      pictures[i].setAttribute('date-index', i);
       pictures[i].onclick = function () {
-        bgImg.style.backgroundImage = "url(" + this.src + ")";
-        // document.body.style.backgroundSize = "cover";
+        var index = this.getAttribute('date-index');
+        body[0].style.backgroundImage = 'url(./' + index + '.jpg)';
       };
+    };
+
+    //实现点击保存将文字保留在页面上  未实现
+    var para = document.querySelector('header article p');
+    var btn = document.querySelector('header article div');
+    btn.onclick = function () {
+      console.log(para.innerHTML);
     }
-    var list = document.querySelectorAll("nav ul li");
-    var link = document.querySelectorAll('nav footer div a')
-    var active = document.querySelectorAll("footer div");
-    console.log(link);
 
-    for (j = 0; j < list.length; j++) {
-      list[j].index = j;
-      list[j].onclick = function () {
-        for (z = 0; z < list.length; z++) {
-          active[z].className = "";
-          active[z].style.display = 'none';
-          active[z].style.transition = 'none';
-          active[z].style.height = '20px';
+    //实现点击搜索框时跳转到必应
+    var searching = document.querySelector('form input');
+    searching.onkeypress = function (event) {
+      if (event.keyCode == 13) {
+        event.preventDefault()
+        window.location.href = "http://bing.com/search?ie=UTF-8&q=" + searching.value;
+        // window.open("http://bing.com/search?ie=UTF-8&q=" + searching.value);
 
+      }
+    }
+
+
+
+    // 实现点击导航栏弹出子菜单
+    var links = document.querySelectorAll('nav>ul>li>a');
+    var nav_div = document.querySelectorAll('nav>ul>li>div');
+    var div_link = document.querySelectorAll('nav>ul>li>a')
+    for (var j = 0; j < links.length; j++) {
+      links[j].setAttribute('date-index', j);
+      links[j].onclick = function () {
+        var index = this.getAttribute('date-index');
+        for (var j = 0; j < links.length; j++) {
+          nav_div[j].className = 'hide';
         }
-        active[this.index].className = 'w active';
-        active[this.index].style.display = 'block';
-        active[this.index].style.transition = 'all 1s';
-        active[this.index].style.height = '300px';
-        // active[this.index].animate([{ height: '0px' }, { height: '300px' }], { duration: 1000, "fil" })
+        nav_div[index].className = 'show';
+
+        // div_link[index].onmouseenter = function () {
+        //   nav_div[index].className = 'show';
+        div_link[index].onmouseleave = function () {
+          console.log(111)
+          setTimeout(function () {
+            nav_div[index].className = 'hide';
+          }, 1000)
+          // }
+        }
+        clearTimeout();
       }
 
+
     }
+
+
+
 
   </script>
 </body>
