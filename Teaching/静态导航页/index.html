@@ -115,6 +115,11 @@
 
       }
     }
+    document.addEventListener('keyup', function (e) {
+      if (e.keyCode === 83) {
+        searching.focus();
+      }
+    });
 
 
 
@@ -134,7 +139,6 @@
         // div_link[index].onmouseenter = function () {
         //   nav_div[index].className = 'show';
         div_link[index].onmouseleave = function () {
-          console.log(111)
           setTimeout(function () {
             nav_div[index].className = 'hide';
           }, 1000)

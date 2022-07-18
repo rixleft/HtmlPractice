@@ -207,6 +207,10 @@ nav>ul {
   align-items: center;
 }
 
+nav>ul>li {
+  position: relative;
+}
+
 nav>ul>li>a {
   position: relative;
   text-transform: uppercase;
@@ -250,7 +254,8 @@ nav>ul>li>a:hover::after {
 }
 
 nav ul li div {
+  position: absolute;
+  top: 70px;
+  left: calc(50% - 40px);
   display: none;
-  text-align: center;
-  /* margin-top: 10px; */
 }

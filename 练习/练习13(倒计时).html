@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            margin: 100px auto;
+            width: 200px;
+        }
+
+        span {
+            float: left;
+            width: 40px;
+            height: 40px;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span class="d"></span>
+        <span class="h"></span>
+        <span class="m"></span>
+        <span class="s"></span>
+    </div>
+    <script>
+        var div = document.querySelector('div');
+        var d = document.querySelector('.d');
+        var h = document.querySelector('.h');
+        var m = document.querySelector('.m');
+        var s = document.querySelector('.s');
+
+
+        // var mid_autumn = +new Date('2122-8-16 18:00:00');
+        // midAutumn();
+        // // 先调用一次，防止刷新时页面显示空白
+        // var time1 = setInterval(midAutumn, 500);
+        // function midAutumn() {
+        //     var currentTime = +new Date();
+        //     var times = mid_autumn - currentTime;
+        //     var days = Math.floor(times / (1000 * 60 * 60 * 24));
+        //     days = days < 10 ? "0" + days : days;
+        //     d.innerHTML = days;
+
+        //     var hours = Math.floor((times - days * 1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+        //     hours = hours < 10 ? '0' + hours : hours;
+        //     h.innerHTML = hours;
+
+        //     var minutes = Math.floor((times - days * 1000 * 60 * 60 * 24 - hours * 1000 * 60 * 60) / (1000 * 60));
+        //     minutes = minutes < 10 ? '0' + minutes : minutes;
+        //     m.innerHTML = minutes;
+
+        //     var seconds = Math.floor((times - days * 1000 * 60 * 60 * 24 - hours * 1000 * 60 * 60 - minutes * 1000 * 60) / 1000);
+        //     seconds = seconds < 10 ? '0' + seconds : seconds;
+        //     s.innerHTML = seconds;
+
+        // }
+
+
+        //倒计时
+        var inputTime = +new Date('2024-7-18 18:00:00');
+        countDown();
+        // 先调用一次，防止刷新时页面显示空白
+        function countDown() {
+            var currentTime = +new Date();
+            var times = (inputTime - currentTime) / 1000;
+            var days = parseInt(times / 60 / 60 / 24);
+            days = days < 10 ? "0" + days : days;
+            d.innerHTML = days;
+            var hours = parseInt(times / 60 / 60 % 24);
+            hours = hours < 10 ? '0' + hours : hours;
+            h.innerHTML = hours;
+            var minutes = parseInt(times / 60 % 60);
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            m.innerHTML = minutes;
+            var seconds = parseInt(times % 60);
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            s.innerHTML = seconds;
+
+        }
+        var time2 = setInterval(countDown, 500);
+
+    </script>
+</body>
+
+</html>
