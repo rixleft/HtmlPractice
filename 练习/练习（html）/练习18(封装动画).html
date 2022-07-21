@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            left: 0;
+            top: 100px;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+        span {
+            position: absolute;
+            display: block;
+            left: 0;
+            top: 200px;
+            width: 100px;
+            height: 100px;
+            background: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="To500">到五百</button>
+    <button class="To800">到八百</button>
+    <div>111</div>
+    <span>222</span>
+    <script>
+        // var obj={};
+        // obj.name='andy';
+        // 下面用到的obj.timer就是给对象添加属性，这样就可以区分不同的定时器了
+        // 简单动画函数封装obj目标对象 target 目标位置
+
+        function animate(obj, target, callback) {
+            clearInterval(obj.timer)
+            obj.timer = setInterval(function () {
+                // 步长值写在定时器的里面
+                var step = (target - obj.offsetLeft) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+
+                if (obj.offsetLeft == target) {
+                    // 停止动画，本质就是停止定时器
+                    clearInterval(obj.timer);
+                    callback();
+
+                }
+                //步长公式：（目标值-现在的位置）/10
+                obj.style.left = obj.offsetLeft + step + "px"; //实现减速停下的效果
+                // obj.style.left = obj.offsetLeft + 1 + "px"; //实现匀速的效果
+
+            }, 30);
+        }
+        var div = document.querySelector('div');
+        var span = document.querySelector('span');
+        var btn = document.querySelectorAll('button');
+        btn[0].addEventListener('click', function () {
+            animate(div, 500);
+            animate(span, 200);
+
+        })
+        btn[1].addEventListener('click', function () {
+            animate(div, 800, function () {
+                div.style.background = 'orange';
+
+            });
+            animate(span, 500, function () {
+                span.style.background = 'red';
+            });
+
+        })
+        // 调用函数
+    </script>
+</body>
+
+</html>
