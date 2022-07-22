@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        canvas {
+            border: 3px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas class="canvas" width="800" height="800"></canvas>
+    <script>
+        var canvas = document.querySelector('.canvas');
+
+        var ctx = canvas.getContext('2d');
+        ctx.arc(400, 400, 350, 0, 2 * Math.PI);
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        var num = 12;
+        for (i = 0; i < num; i++) {
+            var X =
+                ctx.fillRect(400, 400, 30, 340)
+        }
+
+    </script>
+</body>
+
+</html>

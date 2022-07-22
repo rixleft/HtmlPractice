@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+            width: 300px;
+            margin: 50px auto 0;
+        }
+
+        .box div {
+            width: 300px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 50px;
+            font-weight: bold;
+            transform-origin: left center;
+            position: absolute;
+            text-align: right;
+            padding-right: 20px;
+        }
+
+        .box span {
+            display: inline-block;
+        }
+
+        input {
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="tools">
+        <input type="number" value="5" min="1" max="12">
+        <label>
+            调整数字显示角度
+            <input type="checkbox" checked>
+        </label>
+
+    </div>
+
+    <div class="box"></div>
+
+    <script>
+        var box = document.querySelector('.box');
+        var inputs = document.querySelectorAll('input');
+
+        var max = 12;
+        var nums = max;
+        var angle = 360 / nums;
+
+        inputs[0].value = nums;
+
+        inputs[0].onchange = function () {
+            nums = inputs[0].value;
+
+            if (nums < 1 || nums > max) {
+                nums = nums < 1 ? 1 : max;
+            }
+            inputs[0].value = nums;
+            angle = 360 / nums;
+            randElements();
+        };
+
+        inputs[1].onchange = randElements;
+
+        randElements();
+
+        function randElements() {
+            var isChecked = inputs[1].checked;
+            box.innerHTML = '';
+            for (var i = 0; i < nums; i++) {
+                var div = document.createElement('div');
+                var span = document.createElement('span');
+                span.innerHTML = i < 9 ? '0' + (i + 1) : i + 1;
+                div.style.color = 'white';
+                div.style.background = getRandomColor();
+                if (isChecked) span.style.transform = "rotate(-" + (angle * i) + "deg)";
+                div.style.transform = "translate(200px, 300px) rotate(" + (angle * i) + "deg)";
+                div.appendChild(span);
+                box.appendChild(div);
+            }
+        }
+
+        // console.log( getRandColor() );
+
+        function getRandColor() {
+            return '#' + (Math.random()).toString(16).slice(2, 8);
+        }
+        function getRandomColor() {
+            return 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -23,6 +23,7 @@
 
         .arrow-l,
         .arrow-r {
+            display: none;
             position: absolute;
             text-align: center;
             line-height: 26px;
@@ -30,6 +31,7 @@
             width: 26px;
             height: 26px;
             background: rgba(206, 77, 77, 0.5);
+            z-index: 1;
         }
 
         .arrow-l {
@@ -44,6 +46,7 @@
         }
 
         .focus {
+            overflow: hidden;
             position: relative;
             height: 432px;
             width: 768px;
@@ -53,8 +56,11 @@
 
 
         .focus ul {
-            width: 900%;
-            height: 432px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1000%;
+
         }
 
         .focus ul li {
@@ -72,52 +78,224 @@
             height: 100%;
             vertical-align: middle;
         }
+
+        .focus ol {
+            position: absolute;
+            bottom: 20px;
+            left: 50px;
+        }
+
+        .focus ol li {
+            float: left;
+            width: 8px;
+            height: 8px;
+            border: 2px solid rgba(255, 255, 255, .5);
+            margin: 0 3px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .current {
+            background: orange;
+        }
     </style>
 </head>
 
 <body>
     <div class="focus">
         <!-- 左侧按钮 -->
-        <a href="#" class="arrow-l">
+        <a href="javascript:;" class="arrow-l">
             &lt;
         </a>
         <!-- 右侧按钮 -->
-        <a href="#" class="arrow-r">
+        <a href="javascript:;" class="arrow-r">
             &gt;
         </a>
         <ul>
             <li>
-                <a href="#"><img src="./0.jpg" alt=""></a>
+                <a href="javascript:;"><img src="./0.jpg" alt=""></a>
             </li>
             <li>
-                <a href="#"><img src="./1.jpg" alt=""></a>
+                <a href="javascript:;"><img src="./1.jpg" alt=""></a>
             </li>
             <li>
-                <a href="#"><img src="./2.jpg" alt=""></a>
+                <a href="javascript:;"><img src="./2.jpg" alt=""></a>
             </li>
             <li>
-                <a href="#"><img src="./3.jpg" alt=""></a>
+                <a href="javascript:;"><img src="./3.jpg" alt=""></a>
             </li>
             <li>
-                <a href="#"><img src="./4.jpg" alt=""></a>
+                <a href="javascript:;"><img src="./4.jpg" alt=""></a>
             </li>
             <li>
-                <a href="#"><img src="./5.jpg" alt=""></a>
+                <a href="javascript:;"><img src="./5.jpg" alt=""></a>
             </li>
             <li>
-                <a href="#"><img src="./6.jpg" alt=""></a>
+                <a href="javascript:;"><img src="./6.jpg" alt=""></a>
             </li>
             <li>
-                <a href="#"><img src="./7.jpg" alt=""></a>
+                <a href="javascript:;"><img src="./7.jpg" alt=""></a>
             </li>
             <li>
-                <a href="#"><img src="./8.jpg" alt=""></a>
+                <a href="javascript:;"><img src="./8.jpg" alt=""></a>
             </li>
         </ul>
         <ol class="circle">
-            <li></li>
         </ol>
     </div>
+    <script>
+        // 封装了一个动画函数,可以传递三个值，第三个为回调函数
+        function animate(obj, target, callback) {
+            // 将定时器绑定在传入的对象上区分不同的定时器。
+            clearInterval(obj.timer)
+            obj.timer = setInterval(function () {
+                // 步长值写在定时器的里面
+                var step = (target - obj.offsetLeft) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (obj.offsetLeft == target) {
+                    // 停止动画，本质就是停止定时器
+                    clearInterval(obj.timer);
+                    // 当定时器停止时，执行回调函数
+                    // if (callback) {
+                    //     // 调用函数
+                    //     callback();
+                    // }
+                    // 简写方式
+                    callback && callback();
+
+                }
+                //步长公式：（目标值-现在的位置）/10
+                obj.style.left = obj.offsetLeft + step + "px"; //实现减速停下的效果
+                // obj.style.left = obj.offsetLeft + 1 + "px"; //实现匀速的效果，每次加1。
+            }, 30);
+        }
+
+        var switchover = document.querySelectorAll('.focus>a');
+        var main_box = document.querySelector('.focus');
+        // 鼠标经过时左右箭头的显示和隐藏
+        main_box.addEventListener('mouseenter', function () {
+            switchover[0].style.display = 'block';
+            switchover[1].style.display = 'block';
+            // 鼠标进入时停止定时器
+            clearInterval(timer);
+            timer = null;
+        });
+        main_box.addEventListener('mouseleave', function () {
+            switchover[0].style.display = 'none';
+            switchover[1].style.display = 'none';
+            // 再开启定时器
+            timer = setInterval(function () {
+                // 手动调用右点击事件
+                switchover[1].click();
+            }, 4000);
+
+        })
+
+        // 点击小圆点切换图片
+        var num_circle = document.querySelector('ol');
+        var num_pic = document.querySelectorAll('ul li');
+        var num = document.querySelector('ul');
+        var focusWidth = main_box.offsetWidth;
+        for (var i = 0; i < num_pic.length; i++) {
+            // 按照图片的个数给ol里面添加小圆点
+            var li = document.createElement('li');
+            // 设置自定义属性——索引，为了控制图片移动的距离
+            li.setAttribute('index', i);
+            // 将li插入到ol中
+            num_circle.appendChild(li);
+            li.addEventListener('click', function () {
+                if (drag) {
+                    // 当点击的时候，干掉所有人，大家都没有类名.
+                    for (var i = 0; i < num_circle.children.length; i++) {
+                        num_circle.children[i].className = '';
+                    };
+                    // 只给点击的li添加类名
+                    this.className = 'current';
+                    // 当我们点击小圆点时，就得到了该小圆点的索引值
+                    var index = this.getAttribute('index');
+                    // 点击小圆点。移动图片，实际上是移动ul，这里得到的是放图片的盒子的宽度。
+                    // 当我们点击了li的时候，要把这个li的索引号给sum，
+                    sum = index;
+                    // 当我们点击了li的时候，要把这个li的索引号给increase，
+                    increase = index;
+                    // ul的移动距离，实际上就是小圆点的索引值乘以盒子的宽度
+                    animate(num, -index * focusWidth);
+                }
+
+            });
+
+        };
+        // 把ul里面的第一个li设置类名为current
+        num_circle.children[0].className = 'current';
+
+        // 当切换到最后一张照片时，立即克隆一份第一张图片，并且添加到ul里面。
+        var first = num_pic[0].cloneNode(true);
+        num.appendChild(first);
+        // 鼠标点击切换图片
+        var sum = 0;
+        // 点击右箭头，控制小圆圈的切换。
+        var increase = 0;
+        // 节流阀
+        var drag = true;
+        // 右侧按钮的功能
+        switchover[1].addEventListener('click', function () {
+            if (drag) {
+                drag = false;
+                if (sum == num_pic.length) {
+                    num.style.left = 0;
+                    sum = 0;
+                };
+                sum++;
+                // 自定义函数animate可以传递三个参数，最后一个参数为回调函数
+                animate(num, -sum * focusWidth, function () {
+                    drag = true;
+                });
+                increase++;
+                // 判断小圆点是否到最后一张图上，如果是则返回到第一张。
+                if (increase == num_circle.children.length) {
+                    increase = 0;
+                };
+                circleChange();
+            }
+
+        })
+
+        // 左侧按钮的功能
+        switchover[0].addEventListener('click', function () {
+            if (drag) {
+                drag = false;
+                if (sum == 0) {
+                    sum = num_pic.length;
+                    num.style.left = -sum * focusWidth + 'px';
+                };
+                sum--;
+                // 自定义函数animate可以传递三个参数，最后一个参数为回调函数
+                animate(num, -sum * focusWidth, function () {
+                    drag = true;
+                });
+                increase--;
+                // 判断小圆点是否到第一张图上，如果是则返回到最后一张图。
+                // if (increase < 0) {
+                //     increase = num_circle.children.length - 1;
+                // };
+                increase = increase < 0 ? num_circle.children.length - 1 : increase;
+                circleChange();
+            }
+        });
+
+        function circleChange() {
+            // 点击左侧按钮，小圆圈一起切换，并且清除其他小圆圈的current类名
+            for (var i = 0; i < num_circle.children.length; i++) {
+                num_circle.children[i].className = '';
+            };
+            num_circle.children[increase].className = 'current';
+        }
+
+        var timer = setInterval(function () {
+            // 手动调用右点击事件
+            switchover[1].click();
+        }, 4000);
+    </script>
 </body>
 
 </html>
